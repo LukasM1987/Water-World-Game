@@ -2,6 +2,7 @@ package com.waterworld.level;
 
 import com.waterworld.game_engine.GUIState;
 import com.waterworld.game_engine.GameEngine;
+import com.waterworld.game_objects.Enemy;
 import com.waterworld.game_objects.GameObject;
 import com.waterworld.game_objects.Player;
 import com.waterworld.game_objects.Sounds;
@@ -27,10 +28,12 @@ public class LevelOne extends GUIState {
     private static final String UP = "up";
     private static final String WORM = "worm";
     private static final String RIGHT = "right";
+    private static final String ENEMY = "enemy";
     private static final int MINUS_SIXTEEN = -16;
     private static final int MINUS_THIRTY_TWO = -32;
     private static final int MINUS_SIXTY_FOUR = -64;
     private static final int MAX_POINTS = 50;
+    private static final int MINUS_ONE_HUNDRED_TWENTY = -120;
 
     private BufferedImage backgroundImage;
     private BufferedImage wormIcon;
@@ -44,6 +47,8 @@ public class LevelOne extends GUIState {
     private GameObject bubble24x24Two;
     private GameObject bubble36x36One;
     private GameObject worm;
+    private Enemy enemy;
+    private GameObject enemySkin;
 
     private Player player;
 
@@ -78,6 +83,8 @@ public class LevelOne extends GUIState {
         player.horizontalMove();
         player.verticalMove();
         worm.move();
+        enemy.move();
+        enemySkin.move();
         givePoint();
         transferObjects();
         checkPlayerFrameCollision();
@@ -86,6 +93,7 @@ public class LevelOne extends GUIState {
 
     @Override
     public void draw(Graphics g) {
+        enemy.draw(g);
         g.drawImage(backgroundImage, 0, 0, null);
         bubble8x8One.draw(g);
         bubble8x8Two.draw(g);
@@ -96,6 +104,7 @@ public class LevelOne extends GUIState {
         //Miejsce na gracza, przeciwników, elementy poziomu i punkty
 
         //
+        enemySkin.draw(g);
         worm.draw(g);
         player.draw(g);
         g.drawImage(wormIcon, 10, 10, null);
@@ -126,6 +135,8 @@ public class LevelOne extends GUIState {
          bubble24x24Two = new GameObject(2, BUBBLE_16X16, UP, 0, 0, 746, 523, 16, 16);
          bubble36x36One = new GameObject(1, BUBBLE_36X36, UP, 0, 0, 398, 532, 36, 36);
          worm = new GameObject(1, WORM, RIGHT, 0,0, 800, 180, 27,30);
+         enemy = new Enemy(3, 900, 200, 115, 124);
+         enemySkin = new GameObject(3, ENEMY, RIGHT, 0,0, 900, 195, 120,131);
     }
 
     private void transferObjects() {
@@ -169,6 +180,17 @@ public class LevelOne extends GUIState {
             worm.setHorizontalPosition(random.nextInt(400) + 800);
             worm.setVerticalPosition(random.nextInt(320));
             point.gainScoresInFirstLevel();
+        }
+        if (enemy.intersects(player.getRectangle())) {
+            enemy.setVerticalPosition(GameEngine.HEIGHT);
+        }
+        if (enemy.getHorizontalPos() <= MINUS_ONE_HUNDRED_TWENTY) {
+            int yPos = random.nextInt(260);
+            int xPos = random.nextInt(800) + 800;
+            enemy.setVerticalPosition(yPos);
+            enemy.setHorizontalPosition(xPos);
+            enemySkin.setVerticalPosition(yPos - 6);
+            enemySkin.setHorizontalPosition(xPos - 5);
         }
     }
 
