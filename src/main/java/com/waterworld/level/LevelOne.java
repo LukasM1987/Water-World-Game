@@ -17,6 +17,7 @@ import java.util.Random;
 public class LevelOne extends GUIState {
 
     private static final Point point = new Point("level one");
+    private static final Point life = new Point("life");
     private static final Sounds sounds = new Sounds();
     private static final Random random = new Random();
     private static final File background = new File("src/main/resources/game_objects/level_objects/level_one_800x400.jpg");
@@ -109,6 +110,7 @@ public class LevelOne extends GUIState {
         player.draw(g);
         g.drawImage(wormIcon, 10, 10, null);
         point.draw(g);
+        life.draw(g);
         bubble24x24One.draw(g);
         bubble24x24Two.draw(g);
         bubble36x36One.draw(g);
@@ -182,6 +184,7 @@ public class LevelOne extends GUIState {
             point.gainScoresInFirstLevel();
         }
         if (enemy.intersects(player.getRectangle())) {
+            life.takeLife();
             enemy.setVerticalPosition(GameEngine.HEIGHT);
         }
         if (enemy.getHorizontalPos() <= MINUS_ONE_HUNDRED_TWENTY) {
@@ -221,6 +224,8 @@ public class LevelOne extends GUIState {
 
     private void endLevel() {
         if (point.getScoresInFirstLevel() == MAX_POINTS) {
+            System.exit(0);
+        } else if (life.getLife() == 0) {
             System.exit(0);
         }
     }

@@ -13,6 +13,7 @@ public class Point {
     private String level;
     private int score;
     private int scoresInFirstLevel;
+    private int life = 3;
 
     public Point(String level) {
         this.level = level;
@@ -31,6 +32,10 @@ public class Point {
             g.setColor(new Color(225, 74, 83));
             g.setFont(new Font("Showcard Gothic", Font.PLAIN, 28));
             g.drawString(score / 10 + String.valueOf(score % 10) + "/200", (GameEngine.WIDTH / 16), 36);
+        } else if (level.equals("life")) {
+            g.setColor(new Color(225, 74, 83));
+            g.setFont(new Font("Showcard Gothic", Font.PLAIN, 28));
+            g.drawString(String.valueOf(life), 50, 70);
         }
     }
 
@@ -48,5 +53,13 @@ public class Point {
 
     public int getScoresInFirstLevel() {
         return scoresInFirstLevel;
+    }
+
+    public int takeLife() {
+        return life--;
+    }
+
+    public int getLife() {
+        return life;
     }
 }

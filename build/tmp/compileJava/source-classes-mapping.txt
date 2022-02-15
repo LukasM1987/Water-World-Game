@@ -8,8 +8,8 @@ com/waterworld/menu/MainMenu.java
  com.waterworld.menu.MainMenu
 com/waterworld/game_engine/GameEngine.java
  com.waterworld.game_engine.GameEngine
-com/waterworld/level/Point.java
- com.waterworld.level.Point
+com/waterworld/menu/MainMenuBubbles.java
+ com.waterworld.menu.MainMenuBubbles
 com/waterworld/game_engine/GUIState.java
  com.waterworld.game_engine.GUIState
 com/waterworld/game_objects/Sounds.java
@@ -20,8 +20,8 @@ com/waterworld/menu/Help.java
  com.waterworld.menu.Help
 com/waterworld/game_objects/GameObject.java
  com.waterworld.game_objects.GameObject
-com/waterworld/menu/MainMenuBubbles.java
- com.waterworld.menu.MainMenuBubbles
+com/waterworld/level/Point.java
+ com.waterworld.level.Point
 com/waterworld/game_engine/GUIStateManager.java
  com.waterworld.game_engine.GUIStateManager
 com/waterworld/level/LevelOne.java
