@@ -17,6 +17,7 @@ public class GameObject {
     private static final File downButton = new File("src/main/resources/game_objects/menu/down button.png");
     private static final File upButton = new File("src/main/resources/game_objects/menu/up button.png");
     private static final File worm = new File("src/main/resources/game_objects/points/worm 27x30.png");
+    private static final File enemy = new File("src/main/resources/game_objects/enemies/Enemy one.png");
 
     private int initialSpeed;
 
@@ -38,6 +39,7 @@ public class GameObject {
     private BufferedImage down;
     private BufferedImage up;
     private BufferedImage wormIcon;
+    private BufferedImage enemyIcon;
 
     public GameObject(int initialSpeed, String objectName, String direction, int directionX, int directionY, int xPosition, int yPosition, int xSize, int ySize) {
         this.rectangle = new Rectangle(xPosition, yPosition, xSize, ySize);
@@ -60,6 +62,7 @@ public class GameObject {
             down = ImageIO.read(downButton);
             up = ImageIO.read(upButton);
             wormIcon = ImageIO.read(worm);
+            enemyIcon = ImageIO.read(enemy);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -146,6 +149,8 @@ public class GameObject {
            g.drawString("DOWN", rectangle.x, rectangle.y);
        } else if (objectName.equals("worm")) {
            g.drawImage(wormIcon, rectangle.x, rectangle.y, null);
+       } else if (objectName.equals("enemy")) {
+           g.drawImage(enemyIcon, rectangle.x, rectangle.y, null);
        }
     }
 
