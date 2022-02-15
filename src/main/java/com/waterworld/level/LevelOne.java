@@ -17,11 +17,11 @@ import java.util.Random;
 public class LevelOne extends GUIState {
 
     private static final Point point = new Point("level one");
-    private static final Point life = new Point("life");
     private static final Sounds sounds = new Sounds();
     private static final Random random = new Random();
     private static final File background = new File("src/main/resources/game_objects/level_objects/level_one_800x400.jpg");
     private static final File wormPoints = new File("src/main/resources/game_objects/points/worm points 30x30.png");
+    private static final File life = new File("src/main/resources/game_objects/points/life.png");
     private static final String BUBBLE_8X8 = "bubble8x8";
     private static final String BUBBLE_16X16 = "bubble16x16";
     private static final String BUBBLE_24X24 = "bubble24x24";
@@ -35,9 +35,11 @@ public class LevelOne extends GUIState {
     private static final int MINUS_SIXTY_FOUR = -64;
     private static final int MAX_POINTS = 50;
     private static final int MINUS_ONE_HUNDRED_TWENTY = -120;
+    private static final int GIVE_LIFE = 10;
 
     private BufferedImage backgroundImage;
     private BufferedImage wormIcon;
+    private BufferedImage lifeIcon;
     private GameObject bubble8x8One;
     private GameObject bubble8x8Two;
     private GameObject bubble8x8Three;
@@ -52,6 +54,7 @@ public class LevelOne extends GUIState {
     private GameObject enemySkin;
 
     private Player player;
+    private int gainLife;
 
     public LevelOne(com.waterworld.game_engine.GUIStateManager GUIStateManager) {
         this.GUIStateManager = GUIStateManager;
@@ -65,6 +68,7 @@ public class LevelOne extends GUIState {
         try {
             backgroundImage = ImageIO.read(background);
             wormIcon = ImageIO.read(wormPoints);
+            lifeIcon = ImageIO.read(life);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -87,6 +91,7 @@ public class LevelOne extends GUIState {
         enemy.move();
         enemySkin.move();
         givePoint();
+        giveLife();
         transferObjects();
         checkPlayerFrameCollision();
         endLevel();
@@ -110,7 +115,7 @@ public class LevelOne extends GUIState {
         player.draw(g);
         g.drawImage(wormIcon, 10, 10, null);
         point.draw(g);
-        life.draw(g);
+        g.drawImage(lifeIcon, 10, 44, null);
         bubble24x24One.draw(g);
         bubble24x24Two.draw(g);
         bubble36x36One.draw(g);
@@ -184,7 +189,7 @@ public class LevelOne extends GUIState {
             point.gainScoresInFirstLevel();
         }
         if (enemy.intersects(player.getRectangle())) {
-            life.takeLife();
+            point.takeLife();
             enemy.setVerticalPosition(GameEngine.HEIGHT);
         }
         if (enemy.getHorizontalPos() <= MINUS_ONE_HUNDRED_TWENTY) {
@@ -219,14 +224,20 @@ public class LevelOne extends GUIState {
         if (worm.intersects(player.getRectangle())) {
             sounds.givePointSound();
             point.gainScore();
+            gainLife++;
         }
     }
 
     private void endLevel() {
-        if (point.getScoresInFirstLevel() == MAX_POINTS) {
+        if (point.getScoresInLevel() == MAX_POINTS || point.getLife() == 0) {
             System.exit(0);
-        } else if (life.getLife() == 0) {
-            System.exit(0);
+        }
+    }
+
+    private void giveLife() {
+        if (gainLife == GIVE_LIFE) {
+            gainLife = 0;
+            point.giveLife();
         }
     }
 }

@@ -32,11 +32,10 @@ public class Point {
             g.setColor(new Color(225, 74, 83));
             g.setFont(new Font("Showcard Gothic", Font.PLAIN, 28));
             g.drawString(score / 10 + String.valueOf(score % 10) + "/200", (GameEngine.WIDTH / 16), 36);
-        } else if (level.equals("life")) {
-            g.setColor(new Color(225, 74, 83));
-            g.setFont(new Font("Showcard Gothic", Font.PLAIN, 28));
-            g.drawString(String.valueOf(life), 50, 70);
         }
+        g.setColor(new Color(225, 74, 83));
+        g.setFont(new Font("Showcard Gothic", Font.PLAIN, 28));
+        g.drawString(String.valueOf(life), 50, 70);
     }
 
     public int gainScore() {
@@ -51,7 +50,7 @@ public class Point {
         return scoresInFirstLevel++;
     }
 
-    public int getScoresInFirstLevel() {
+    public int getScoresInLevel() {
         return scoresInFirstLevel;
     }
 
@@ -61,5 +60,9 @@ public class Point {
 
     public int getLife() {
         return life;
+    }
+
+    public int giveLife() {
+        return life++;
     }
 }
