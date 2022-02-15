@@ -20,9 +20,9 @@ com/waterworld/menu/Help.java
  com.waterworld.menu.Help
 com/waterworld/game_objects/GameObject.java
  com.waterworld.game_objects.GameObject
-com/waterworld/level/Point.java
- com.waterworld.level.Point
 com/waterworld/game_engine/GUIStateManager.java
  com.waterworld.game_engine.GUIStateManager
 com/waterworld/level/LevelOne.java
  com.waterworld.level.LevelOne
+com/waterworld/level/Point.java
+ com.waterworld.level.Point
