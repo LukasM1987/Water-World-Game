@@ -190,6 +190,7 @@ public class LevelOne extends GUIState {
         }
         if (enemy.intersects(player.getRectangle())) {
             point.takeLife();
+            sounds.hurtPlayerSound();
             enemy.setVerticalPosition(GameEngine.HEIGHT);
         }
         if (enemy.getHorizontalPos() <= MINUS_ONE_HUNDRED_TWENTY) {
@@ -237,6 +238,7 @@ public class LevelOne extends GUIState {
     private void giveLife() {
         if (gainLife == GIVE_LIFE) {
             gainLife = 0;
+            sounds.givePLayerLife();
             point.giveLife();
         }
     }

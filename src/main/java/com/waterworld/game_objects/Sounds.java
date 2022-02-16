@@ -9,6 +9,8 @@ public class Sounds {
     private static final File navigateOption = new File("src/main/resources/game_objects/sounds/Navi choice.wav");
     private static final File choice = new File("src/main/resources/game_objects/sounds/Choice.wav");
     private static final File point = new File("src/main/resources/game_objects/sounds/Point.wav");
+    private static final File hurt = new File("src/main/resources/game_objects/sounds/Hurt.wav");
+    private static final File life = new File("src/main/resources/game_objects/sounds/Life up.wav");
 
     private AudioInputStream audioInputStream;
     private Clip clip;
@@ -38,6 +40,28 @@ public class Sounds {
     public void givePointSound() {
         try {
             audioInputStream = AudioSystem.getAudioInputStream(point);
+            clip = AudioSystem.getClip();
+            clip.open(audioInputStream);
+            clip.start();
+        } catch (IOException | UnsupportedAudioFileException | LineUnavailableException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void hurtPlayerSound() {
+        try {
+            audioInputStream = AudioSystem.getAudioInputStream(hurt);
+            clip = AudioSystem.getClip();
+            clip.open(audioInputStream);
+            clip.start();
+        } catch (IOException | UnsupportedAudioFileException | LineUnavailableException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void givePLayerLife() {
+        try {
+            audioInputStream = AudioSystem.getAudioInputStream(life);
             clip = AudioSystem.getClip();
             clip.open(audioInputStream);
             clip.start();
