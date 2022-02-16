@@ -27,7 +27,7 @@ public class MainMenu extends GUIState {
     private BufferedImage backgroundImage;
     private BufferedImage logoImage;
 
-    private Clip clip;
+    private static Clip clip;
 
     public MainMenu(GUIStateManager GUIStateManager) {
         this.GUIStateManager = GUIStateManager;
@@ -145,7 +145,7 @@ public class MainMenu extends GUIState {
         }
     }
 
-    public Clip getClip() {
+    public static Clip getClip() {
         return clip;
     }
 }
