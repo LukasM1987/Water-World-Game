@@ -6,6 +6,7 @@ import com.waterworld.game_objects.Enemy;
 import com.waterworld.game_objects.GameObject;
 import com.waterworld.game_objects.Player;
 import com.waterworld.game_objects.Sounds;
+import com.waterworld.menu.MainMenu;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -132,18 +133,18 @@ public class LevelOne extends GUIState {
     }
 
     private void setObjects() {
-         bubble8x8One = new GameObject(3, BUBBLE_8X8, UP, 0, 0, 123, 423, 8, 8);
-         bubble8x8Two = new GameObject(3, BUBBLE_8X8, UP, 0, 0, 213, 431, 8, 8);
-         bubble8x8Three = new GameObject(3, BUBBLE_8X8, UP, 0, 0, 437, 411, 8, 8);
-         bubble8x8Four = new GameObject(3, BUBBLE_8X8, UP, 0, 0, 692, 452, 8, 8);
-         bubble16x16One = new GameObject(2, BUBBLE_16X16, UP, 0, 0, 246, 462, 16, 16);
-         bubble16x16Two = new GameObject(2, BUBBLE_16X16, UP, 0, 0, 576, 452, 16, 16);
-         bubble24x24One = new GameObject(2, BUBBLE_24X24, UP, 0, 0, 146, 572, 16, 16);
-         bubble24x24Two = new GameObject(2, BUBBLE_16X16, UP, 0, 0, 746, 523, 16, 16);
-         bubble36x36One = new GameObject(1, BUBBLE_36X36, UP, 0, 0, 398, 532, 36, 36);
-         worm = new GameObject(1, WORM, RIGHT, 0,0, 800, 180, 27,30);
-         enemy = new Enemy(3, 900, 200, 115, 124);
-         enemySkin = new GameObject(3, ENEMY, RIGHT, 0,0, 900, 195, 120,131);
+        bubble8x8One = new GameObject(3, BUBBLE_8X8, UP, 0, 0, 123, 423, 8, 8);
+        bubble8x8Two = new GameObject(3, BUBBLE_8X8, UP, 0, 0, 213, 431, 8, 8);
+        bubble8x8Three = new GameObject(3, BUBBLE_8X8, UP, 0, 0, 437, 411, 8, 8);
+        bubble8x8Four = new GameObject(3, BUBBLE_8X8, UP, 0, 0, 692, 452, 8, 8);
+        bubble16x16One = new GameObject(2, BUBBLE_16X16, UP, 0, 0, 246, 462, 16, 16);
+        bubble16x16Two = new GameObject(2, BUBBLE_16X16, UP, 0, 0, 576, 452, 16, 16);
+        bubble24x24One = new GameObject(2, BUBBLE_24X24, UP, 0, 0, 146, 572, 16, 16);
+        bubble24x24Two = new GameObject(2, BUBBLE_16X16, UP, 0, 0, 746, 523, 16, 16);
+        bubble36x36One = new GameObject(1, BUBBLE_36X36, UP, 0, 0, 398, 532, 36, 36);
+        worm = new GameObject(1, WORM, RIGHT, 0,0, 800, 180, 27,30);
+        enemy = new Enemy(3, 900, 200, 115, 124);
+        enemySkin = new GameObject(3, ENEMY, RIGHT, 0,0, 900, 195, 120,131);
     }
 
     private void transferObjects() {
@@ -231,6 +232,7 @@ public class LevelOne extends GUIState {
 
     private void endLevel() {
         if (point.getScoresInLevel() == MAX_POINTS || point.getLife() == 0) {
+            MainMenu.getClip().stop();
             System.exit(0);
         }
     }
