@@ -1,5 +1,7 @@
 com/waterworld/game_engine/WaterWorld.java
  com.waterworld.game_engine.WaterWorld
+com/waterworld/menu/StatisticsDead.java
+ com.waterworld.menu.StatisticsDead
 com/waterworld/game_engine/Frame.java
  com.waterworld.game_engine.Frame
 com/waterworld/game_objects/Player.java

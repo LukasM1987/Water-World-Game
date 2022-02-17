@@ -1,6 +1,7 @@
 package com.waterworld.level;
 
 import com.waterworld.game_engine.GUIState;
+import com.waterworld.game_engine.GUIStateManager;
 import com.waterworld.game_engine.GameEngine;
 import com.waterworld.game_objects.Enemy;
 import com.waterworld.game_objects.GameObject;
@@ -231,9 +232,12 @@ public class LevelOne extends GUIState {
     }
 
     private void endLevel() {
-        if (point.getScoresInLevel() == MAX_POINTS || point.getLife() == 0) {
-            MainMenu.getClip().stop();
-            System.exit(0);
+        if (point.getScoresInLevel() == MAX_POINTS) {
+            stopMusic();
+
+        } else if (point.getLife() == 0) {
+            stopMusic();
+            GUIStateManager.setStates(GUIStateManager.STATISTICS_DEAD);
         }
     }
 
@@ -243,5 +247,9 @@ public class LevelOne extends GUIState {
             sounds.givePLayerLife();
             point.giveLife();
         }
+    }
+
+    private void stopMusic() {
+        MainMenu.getClip().stop();
     }
 }

@@ -3,6 +3,7 @@ package com.waterworld.game_engine;
 import com.waterworld.level.LevelOne;
 import com.waterworld.menu.Help;
 import com.waterworld.menu.MainMenu;
+import com.waterworld.menu.StatisticsDead;
 
 import javax.sound.sampled.*;
 import java.awt.*;
@@ -21,9 +22,10 @@ public class GUIStateManager {
     public static final int MENU = 0;
     public static final int HELP = 1;
     public static final int LEVEL_ONE = 2;
+    public static final int STATISTICS_DEAD = 3;
 
     private int currentState;
-    private Clip clip;
+    private static Clip clip;
 
     public GUIStateManager() {
         currentState = MENU;
@@ -31,6 +33,7 @@ public class GUIStateManager {
         gamesStates.add(new MainMenu(this));
         gamesStates.add(new Help(this));
         gamesStates.add(new LevelOne(this));
+        gamesStates.add(new StatisticsDead(this));
 
     }
 
@@ -65,7 +68,7 @@ public class GUIStateManager {
         gamesStates.get(getCurrentState()).onKeyReleased(key);
     }
 
-    private void playMainMenuMusic() {
+    public static void playMainMenuMusic() {
         try {
             AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(menuMusic);
             clip = AudioSystem.getClip();

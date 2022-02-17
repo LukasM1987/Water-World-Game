@@ -133,7 +133,7 @@ public class MainMenu extends GUIState {
         System.exit(0);
     }
 
-    private void playLevelMusic() {
+    public static void playLevelMusic() {
         try {
             AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(menuMusic);
             clip = AudioSystem.getClip();
