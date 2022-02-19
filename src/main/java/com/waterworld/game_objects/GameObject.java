@@ -18,6 +18,9 @@ public class GameObject {
     private static final File upButton = new File("src/main/resources/game_objects/menu/up button.png");
     private static final File worm = new File("src/main/resources/game_objects/points/worm 27x30.png");
     private static final File enemy = new File("src/main/resources/game_objects/enemies/Enemy one.png");
+    private static final File seaWeedOne = new File("src/main/resources/game_objects/level_objects/seaweed 1.png");
+    private static final File seaWeedTwo = new File("src/main/resources/game_objects/level_objects/seaweed 2.png");
+    private static final File deadFish = new File("src/main/resources/game_objects/level_objects/dead fish.png");
 
     private int initialSpeed;
 
@@ -40,6 +43,9 @@ public class GameObject {
     private BufferedImage up;
     private BufferedImage wormIcon;
     private BufferedImage enemyIcon;
+    private BufferedImage seaWeedOneIcon;
+    private BufferedImage seaWeedTwoIcon;
+    private BufferedImage deadFishIcon;
 
     public GameObject(int initialSpeed, String objectName, String direction, int directionX, int directionY, int xPosition, int yPosition, int xSize, int ySize) {
         this.rectangle = new Rectangle(xPosition, yPosition, xSize, ySize);
@@ -63,6 +69,9 @@ public class GameObject {
             up = ImageIO.read(upButton);
             wormIcon = ImageIO.read(worm);
             enemyIcon = ImageIO.read(enemy);
+            seaWeedOneIcon = ImageIO.read(seaWeedOne);
+            seaWeedTwoIcon = ImageIO.read(seaWeedTwo);
+            deadFishIcon = ImageIO.read(deadFish);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -151,6 +160,12 @@ public class GameObject {
            g.drawImage(wormIcon, rectangle.x, rectangle.y, null);
        } else if (objectName.equals("enemy")) {
            g.drawImage(enemyIcon, rectangle.x, rectangle.y, null);
+       } else if (objectName.equals("seaweed one")) {
+           g.drawImage(seaWeedOneIcon, rectangle.x, rectangle.y, null);
+       } else if (objectName.equals("seaweed two")) {
+           g.drawImage(seaWeedTwoIcon, rectangle.x, rectangle.y, null);
+       } else if (objectName.equals("dead fish")) {
+           g.drawImage(deadFishIcon, rectangle.x, rectangle.y, null);
        }
     }
 
