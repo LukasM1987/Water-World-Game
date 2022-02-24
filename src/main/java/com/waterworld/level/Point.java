@@ -8,7 +8,7 @@ import java.util.List;
 
 public class Point {
 
-    private static final List<Integer> points = new ArrayList<>();
+    private final List<Integer> points = new ArrayList<>();
 
     private String level;
     private int score;
@@ -65,4 +65,21 @@ public class Point {
     public int giveLife() {
         return life++;
     }
+
+    public void setLife(int life) {
+        this.life = life;
+    }
+
+    public void setScore(int score) {
+        this.score = score;
+    }
+
+    public List<Integer> getPoints() {
+        return points;
+    }
+
+    public void setScoresInFirstLevel(int scoresInFirstLevel) {
+        this.scoresInFirstLevel = scoresInFirstLevel;
+    }
 }
+

@@ -3,6 +3,7 @@ package com.waterworld.menu;
 import com.waterworld.game_engine.GUIState;
 import com.waterworld.game_engine.GUIStateManager;
 import com.waterworld.game_engine.GameEngine;
+import com.waterworld.game_objects.MainMenuBubbles;
 import com.waterworld.game_objects.Sounds;
 
 import javax.imageio.ImageIO;
@@ -78,14 +79,14 @@ public class MainMenu extends GUIState {
 
     private int selectMenuOption(){
         if(currentChoice == 0){
-            GUIStateManager.setStates(GUIStateManager.LEVEL_ONE);
+            GUIStateManager.setStates(com.waterworld.game_engine.GUIStateManager.LEVEL_ONE);
             GUIStateManager.getClip().stop();
             playLevelMusic();
 
         }
 
         if (currentChoice == 1) {
-            GUIStateManager.setStates(GUIStateManager.HELP);
+            GUIStateManager.setStates(com.waterworld.game_engine.GUIStateManager.HELP);
         }
 
         if(currentChoice == 2){

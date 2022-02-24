@@ -1,5 +1,6 @@
-package com.waterworld.menu;
+package com.waterworld.game_objects;
 
+import com.waterworld.game_engine.StringObjectValue;
 import com.waterworld.game_objects.GameObject;
 
 import java.awt.*;
@@ -9,11 +10,6 @@ public class MainMenuBubbles {
 
     private static final Random random = new Random();
 
-    private static final String BUBBLE_8X8 = "bubble8x8";
-    private static final String BUBBLE_16X16 = "bubble16x16";
-    private static final String BUBBLE_24X24 = "bubble24x24";
-    private static final String UP = "up";
-    private static final String ANY_DIRECTION = "any direction";
     private static final int VERTICAL_MINUS_THIRTY_TWO = -32;
     private static final int VERTICAL_MINUS_SIXTY_FOUR = -64;
 
@@ -97,30 +93,30 @@ public class MainMenuBubbles {
     }
 
     public void setBubbles() {
-        bubble8x8One = new GameObject(2, BUBBLE_8X8, ANY_DIRECTION,0,0,300, 200, 8, 8);
-        bubble8x8Two = new GameObject(2, BUBBLE_8X8, UP,0,0,350, 205, 8, 8);
-        bubble8x8Three = new GameObject(1, BUBBLE_8X8, ANY_DIRECTION, 1,0,450, 190, 8, 8);
-        bubble8x8Four = new GameObject(1, BUBBLE_8X8, UP, 0, 0, 380, 235, 8, 8);
-        bubble8x8Five = new GameObject(2, BUBBLE_8X8, ANY_DIRECTION, 1, 0, 410, 215, 8, 8);
-        bubble8x8Six = new GameObject(1, BUBBLE_8X8, ANY_DIRECTION, 0,0, 280, 243, 8, 8);
-        bubble8x8Seven = new GameObject(2, BUBBLE_8X8, UP, 0, 0, 423, 247, 8, 8);
-        bubble8x8Eight = new GameObject(1, BUBBLE_8X8, UP, 0, 0, 443, 267, 8, 8);
-        bubble8x8Nine = new GameObject(2, BUBBLE_8X8, ANY_DIRECTION, 0,0, 280, 275, 8, 8);
-        bubble8x8Ten = new GameObject(1, BUBBLE_8X8, ANY_DIRECTION, 1, 0, 433, 262, 8, 8);
-        bubble8x8Eleven = new GameObject(1, BUBBLE_8X8, UP, 0,0, 278, 254, 8, 8);
-        bubble8x8Twelve = new GameObject(1, BUBBLE_8X8, ANY_DIRECTION, 0, 0, 306, 306, 8, 8);
-        bubble8x8Thirteen = new GameObject(2, BUBBLE_8X8, ANY_DIRECTION, 1, 0, 455, 289, 8, 8);
-        bubble8x8Fourteen = new GameObject(3, BUBBLE_8X8, UP, 0, 0, 390, 265, 8, 8);
-        bubble8x8Fifteen = new GameObject(3, BUBBLE_8X8, UP, 0, 0, 465, 300, 8, 8);
-        bubble8x8Sixteen = new GameObject(3, BUBBLE_8X8, UP, 0, 0, 274, 323, 8, 8);
-        bubble8x8Seventeen = new GameObject(2, BUBBLE_8X8, UP,0, 0, 350, 333, 8,8);
-        bubble8x8Eighteen = new GameObject(1, BUBBLE_8X8, ANY_DIRECTION, 1,0,450,320, 8,8);
-        bubble8x8Nineteen = new GameObject(1, BUBBLE_8X8, ANY_DIRECTION, 0, 0, 380, 210,8, 8);
-        bubble8x8Twenty = new GameObject(1, BUBBLE_8X8, ANY_DIRECTION, 1, 0, 398, 230,8, 8);
-        bubble16x16One = new GameObject(2, BUBBLE_16X16, UP, 0,0, 200, 616, 16, 16);
-        bubble16x16Two = new GameObject(2, BUBBLE_16X16, UP, 0,0, 600, 646, 16, 16);
-        bubble24x24One = new GameObject(1, BUBBLE_24X24, UP, 0, 0, 200, 600, 24,24);
-        bubble24x24Two = new GameObject(1, BUBBLE_24X24, UP, 0, 0, 500, 670, 24,24);
+        bubble8x8One = new GameObject(2, StringObjectValue.BUBBLE_8X8.getValue(), StringObjectValue.ANY_DIRECTION.getValue(), 0,0,300, 200, 8, 8);
+        bubble8x8Two = new GameObject(2, StringObjectValue.BUBBLE_8X8.getValue(), StringObjectValue.UP.getValue(), 0,0,350, 205, 8, 8);
+        bubble8x8Three = new GameObject(1, StringObjectValue.BUBBLE_8X8.getValue(), StringObjectValue.ANY_DIRECTION.getValue(), 1,0,450, 190, 8, 8);
+        bubble8x8Four = new GameObject(1, StringObjectValue.BUBBLE_8X8.getValue(), StringObjectValue.UP.getValue(), 0, 0, 380, 235, 8, 8);
+        bubble8x8Five = new GameObject(2, StringObjectValue.BUBBLE_8X8.getValue(), StringObjectValue.ANY_DIRECTION.getValue(), 1, 0, 410, 215, 8, 8);
+        bubble8x8Six = new GameObject(1, StringObjectValue.BUBBLE_8X8.getValue(), StringObjectValue.ANY_DIRECTION.getValue(), 0,0, 280, 243, 8, 8);
+        bubble8x8Seven = new GameObject(2, StringObjectValue.BUBBLE_8X8.getValue(), StringObjectValue.UP.getValue(), 0, 0, 423, 247, 8, 8);
+        bubble8x8Eight = new GameObject(1, StringObjectValue.BUBBLE_8X8.getValue(), StringObjectValue.UP.getValue(), 0, 0, 443, 267, 8, 8);
+        bubble8x8Nine = new GameObject(2, StringObjectValue.BUBBLE_8X8.getValue(), StringObjectValue.ANY_DIRECTION.getValue(), 0,0, 280, 275, 8, 8);
+        bubble8x8Ten = new GameObject(1, StringObjectValue.BUBBLE_8X8.getValue(), StringObjectValue.ANY_DIRECTION.getValue(), 1, 0, 433, 262, 8, 8);
+        bubble8x8Eleven = new GameObject(1, StringObjectValue.BUBBLE_8X8.getValue(), StringObjectValue.UP.getValue(), 0,0, 278, 254, 8, 8);
+        bubble8x8Twelve = new GameObject(1, StringObjectValue.BUBBLE_8X8.getValue(), StringObjectValue.ANY_DIRECTION.getValue(), 0, 0, 306, 306, 8, 8);
+        bubble8x8Thirteen = new GameObject(2, StringObjectValue.BUBBLE_8X8.getValue(), StringObjectValue.ANY_DIRECTION.getValue(), 1, 0, 455, 289, 8, 8);
+        bubble8x8Fourteen = new GameObject(3, StringObjectValue.BUBBLE_8X8.getValue(), StringObjectValue.UP.getValue(), 0, 0, 390, 265, 8, 8);
+        bubble8x8Fifteen = new GameObject(3, StringObjectValue.BUBBLE_8X8.getValue(), StringObjectValue.UP.getValue(), 0, 0, 465, 300, 8, 8);
+        bubble8x8Sixteen = new GameObject(3, StringObjectValue.BUBBLE_8X8.getValue(), StringObjectValue.UP.getValue(), 0, 0, 274, 323, 8, 8);
+        bubble8x8Seventeen = new GameObject(2, StringObjectValue.BUBBLE_8X8.getValue(), StringObjectValue.UP.getValue(),0, 0, 350, 333, 8,8);
+        bubble8x8Eighteen = new GameObject(1, StringObjectValue.BUBBLE_8X8.getValue(), StringObjectValue.ANY_DIRECTION.getValue(), 1,0,450,320, 8,8);
+        bubble8x8Nineteen = new GameObject(1, StringObjectValue.BUBBLE_8X8.getValue(), StringObjectValue.ANY_DIRECTION.getValue(), 0, 0, 380, 210,8, 8);
+        bubble8x8Twenty = new GameObject(1, StringObjectValue.BUBBLE_8X8.getValue(), StringObjectValue.ANY_DIRECTION.getValue(), 1, 0, 398, 230,8, 8);
+        bubble16x16One = new GameObject(2, StringObjectValue.BUBBLE_8X8.getValue(), StringObjectValue.UP.getValue(), 0,0, 200, 616, 16, 16);
+        bubble16x16Two = new GameObject(2, StringObjectValue.BUBBLE_8X8.getValue(), StringObjectValue.UP.getValue(), 0,0, 600, 646, 16, 16);
+        bubble24x24One = new GameObject(1, StringObjectValue.BUBBLE_8X8.getValue(), StringObjectValue.UP.getValue(), 0, 0, 200, 600, 24,24);
+        bubble24x24Two = new GameObject(1, StringObjectValue.BUBBLE_8X8.getValue(), StringObjectValue.UP.getValue(), 0, 0, 500, 670, 24,24);
     }
 
     public void transferBubbles() {
