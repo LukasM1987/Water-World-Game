@@ -2,6 +2,7 @@ package com.waterworld.level;
 
 import com.waterworld.game_engine.GUIState;
 import com.waterworld.game_engine.GameEngine;
+import com.waterworld.game_engine.StringObjectValue;
 import com.waterworld.game_objects.*;
 import com.waterworld.menu.MainMenu;
 
@@ -14,8 +15,8 @@ import java.util.Random;
 
 public class LevelOne extends GUIState {
 
-    private static final Point point = new Point("level one");
-    private static final LevelBubbles levelBubbles = new LevelBubbles();
+    private static final Point point = new Point(StringObjectValue.LEVEL_ONE.getValue());
+    private static final GameBubbles levelBubbles = new GameBubbles(true);
     private static final LevelSeaweed levelSeaweed = new LevelSeaweed();
     private static final Sounds sounds = new Sounds();
     private static final Random random = new Random();
@@ -23,9 +24,6 @@ public class LevelOne extends GUIState {
     private static final File wormPoints = new File("src/main/resources/game_objects/points/worm points 30x30.png");
     private static final File life = new File("src/main/resources/game_objects/points/life.png");
 
-    private static final String WORM = "worm";
-    private static final String RIGHT = "right";
-    private static final String ENEMY = "enemy";
     private static final int MINUS_THIRTY_TWO = -32;
     private static final int MAX_POINTS = 50;
     private static final int MINUS_ONE_HUNDRED_TWENTY = -120;
@@ -81,6 +79,7 @@ public class LevelOne extends GUIState {
         enemy.draw(g);
         g.drawImage(backgroundImage, 0, 0, null);
         levelBubbles.drawBack(g);
+        levelSeaweed.drawBack(g);
         //Miejsce na gracza, przeciwników, elementy poziomu i punkty
 
         //
@@ -108,9 +107,9 @@ public class LevelOne extends GUIState {
     private void setObjects() {
         levelBubbles.init();
         levelSeaweed.init();
-        worm = new GameObject(1, WORM, RIGHT, 0,0, 800, 180, 27,30);
+        worm = new GameObject(1, StringObjectValue.WORM.getValue(), StringObjectValue.RIGHT.getValue(), 0,0, 800, 180, 27,30);
         enemy = new Enemy(3, 900, 200, 115, 124);
-        enemySkin = new GameObject(3, ENEMY, RIGHT, 0,0, 900, 195, 120,131);
+        enemySkin = new GameObject(3, StringObjectValue.ENEMY.getValue(), StringObjectValue.RIGHT.getValue(), 0,0, 900, 195, 120,131);
 
     }
 
@@ -125,7 +124,7 @@ public class LevelOne extends GUIState {
         if (enemy.intersects(player.getRectangle())) {
             point.takeLife();
             sounds.hurtPlayerSound();
-            enemy.setVerticalPosition(-100);
+            enemy.setVerticalPosition(-200);
         }
         if (enemy.getHorizontalPos() <= MINUS_ONE_HUNDRED_TWENTY) {
             int yPos = random.nextInt(260);
@@ -166,16 +165,30 @@ public class LevelOne extends GUIState {
     private void endLevel() {
         if (point.getScoresInLevel() == MAX_POINTS) {
             stopMusic();
+            point.getPoints().add(point.getScoresInLevel());
+            point.setScoresInFirstLevel(0);
 
         } else if (point.getLife() == 0) {
+            zeroLife();
             stopMusic();
-            GUIStateManager.setStates(GUIStateManager.STATISTICS_DEAD);
+            point.setLife(3);
+            point.setScore(0);
+            enemySkin.setHorizontalPosition(900);
+            enemy.setHorizontalPosition(900);
+            worm.setHorizontalPosition(900);
+            player.setHorizontalPosition(150);
+            player.setVerticalPosition(150);
+            player.setXDirection(0);
+            player.setYDirection(0);
+            levelSeaweed.moveOutOfFrame();
+            levelBubbles.moveOutOfFrame();
+            GUIStateManager.setStates(com.waterworld.game_engine.GUIStateManager.STATISTICS_DEAD);
         }
     }
 
     private void giveLife() {
         if (gainLife == GIVE_LIFE) {
-            gainLife = 0;
+            zeroLife();
             sounds.givePLayerLife();
             point.giveLife();
         }
@@ -183,5 +196,10 @@ public class LevelOne extends GUIState {
 
     private void stopMusic() {
         MainMenu.getClip().stop();
+    }
+
+    private int zeroLife() {
+        gainLife = 0;
+        return gainLife;
     }
 }
