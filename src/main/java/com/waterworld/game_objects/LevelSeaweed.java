@@ -30,22 +30,22 @@ public class LevelSeaweed {
     private GameObject seaweedTwo2;
 
     public void init() {
-        seaweedOne1 = new GameObject(1, StringObjectValue.SEAWEED_TWO.getValue(), StringObjectValue.RIGHT.getValue(), 0,0,GameEngine.WIDTH, 315,100,85);
-        seaweedOne2 = new GameObject(1, StringObjectValue.SEAWEED_TWO.getValue(), StringObjectValue.RIGHT.getValue(), 0,0,GameEngine.WIDTH + 65, 315,100,85);
-        seaweedOne3 = new GameObject(1, StringObjectValue.SEAWEED_TWO.getValue(), StringObjectValue.RIGHT.getValue(), 0,0,GameEngine.WIDTH + 130, 315,100,85);
-        seaweedOne4 = new GameObject(1, StringObjectValue.SEAWEED_TWO.getValue(), StringObjectValue.RIGHT.getValue(), 0,0,GameEngine.WIDTH + 195, 315,100,85);
-        seaweedOne5 = new GameObject(1, StringObjectValue.SEAWEED_TWO.getValue(), StringObjectValue.RIGHT.getValue(), 0,0,GameEngine.WIDTH + 260, 315,100,85);
-        seaweedOne6 = new GameObject(1, StringObjectValue.SEAWEED_TWO.getValue(), StringObjectValue.RIGHT.getValue(), 0,0,GameEngine.WIDTH + 325, 315,100,85);
-        seaweedOne7 = new GameObject(1, StringObjectValue.SEAWEED_TWO.getValue(), StringObjectValue.RIGHT.getValue(), 0,0,GameEngine.WIDTH + 390, 315,100,85);
-        seaweedOne8 = new GameObject(1, StringObjectValue.SEAWEED_TWO.getValue(), StringObjectValue.RIGHT.getValue(), 0,0,GameEngine.WIDTH + 455, 315,100,85);
-        seaweedOne9 = new GameObject(1, StringObjectValue.SEAWEED_TWO.getValue(), StringObjectValue.RIGHT.getValue(), 0,0,GameEngine.WIDTH + 520, 315,100,85);
-        seaweedOne10 = new GameObject(1, StringObjectValue.SEAWEED_TWO.getValue(), StringObjectValue.RIGHT.getValue(), 0,0,GameEngine.WIDTH + 585,315,100,85);
-        seaweedOne11 = new GameObject(1, StringObjectValue.SEAWEED_TWO.getValue(), StringObjectValue.RIGHT.getValue(), 0,0,GameEngine.WIDTH + 650, 315,100,85);
-        seaweedOne12 = new GameObject(1, StringObjectValue.SEAWEED_TWO.getValue(), StringObjectValue.RIGHT.getValue(), 0,0,GameEngine.WIDTH + 715, 315,100,85);
-        seaweedOne13 = new GameObject(1, StringObjectValue.SEAWEED_TWO.getValue(), StringObjectValue.RIGHT.getValue(), 0,0,GameEngine.WIDTH + 780, 315,100,85);
-        seaweedOne14 = new GameObject(1, StringObjectValue.SEAWEED_TWO.getValue(), StringObjectValue.RIGHT.getValue(), 0,0,GameEngine.WIDTH + 845, 315,100,85);
-        seaweedTwo1 = new GameObject(1, StringObjectValue.SEAWEED_ONE.getValue(), StringObjectValue.RIGHT.getValue(),0,0, GameEngine.WIDTH + 100, 200, 200,200);
-        seaweedTwo2 = new GameObject(1, StringObjectValue.SEAWEED_ONE.getValue(), StringObjectValue.RIGHT.getValue(),0,0, GameEngine.WIDTH + 600, 200, 200,200);
+        seaweedOne1 = new GameObject(1, StringObjectValue.SEAWEED_TWO.getValue(), StringObjectValue.RIGHT.getValue(), 0,0,GameEngine.WIDTH + 150, 315,100,85);
+        seaweedOne2 = new GameObject(1, StringObjectValue.SEAWEED_TWO.getValue(), StringObjectValue.RIGHT.getValue(), 0,0,GameEngine.WIDTH + 65 + 150, 315,100,85);
+        seaweedOne3 = new GameObject(1, StringObjectValue.SEAWEED_TWO.getValue(), StringObjectValue.RIGHT.getValue(), 0,0,GameEngine.WIDTH + 130 + 150, 315,100,85);
+        seaweedOne4 = new GameObject(1, StringObjectValue.SEAWEED_TWO.getValue(), StringObjectValue.RIGHT.getValue(), 0,0,GameEngine.WIDTH + 195 + 150, 315,100,85);
+        seaweedOne5 = new GameObject(1, StringObjectValue.SEAWEED_TWO.getValue(), StringObjectValue.RIGHT.getValue(), 0,0,GameEngine.WIDTH + 260 + 150, 315,100,85);
+        seaweedOne6 = new GameObject(1, StringObjectValue.SEAWEED_TWO.getValue(), StringObjectValue.RIGHT.getValue(), 0,0,GameEngine.WIDTH + 325 + 150, 315,100,85);
+        seaweedOne7 = new GameObject(1, StringObjectValue.SEAWEED_TWO.getValue(), StringObjectValue.RIGHT.getValue(), 0,0,GameEngine.WIDTH + 390 + 150, 315,100,85);
+        seaweedOne8 = new GameObject(1, StringObjectValue.SEAWEED_TWO.getValue(), StringObjectValue.RIGHT.getValue(), 0,0,GameEngine.WIDTH + 455 + 150, 315,100,85);
+        seaweedOne9 = new GameObject(1, StringObjectValue.SEAWEED_TWO.getValue(), StringObjectValue.RIGHT.getValue(), 0,0,GameEngine.WIDTH + 520 + 150, 315,100,85);
+        seaweedOne10 = new GameObject(1, StringObjectValue.SEAWEED_TWO.getValue(), StringObjectValue.RIGHT.getValue(), 0,0,GameEngine.WIDTH + 585 + 150,315,100,85);
+        seaweedOne11 = new GameObject(1, StringObjectValue.SEAWEED_TWO.getValue(), StringObjectValue.RIGHT.getValue(), 0,0,GameEngine.WIDTH + 650 + 150, 315,100,85);
+        seaweedOne12 = new GameObject(1, StringObjectValue.SEAWEED_TWO.getValue(), StringObjectValue.RIGHT.getValue(), 0,0,GameEngine.WIDTH + 715 + 150, 315,100,85);
+        seaweedOne13 = new GameObject(1, StringObjectValue.SEAWEED_TWO.getValue(), StringObjectValue.RIGHT.getValue(), 0,0,GameEngine.WIDTH + 780 + 150, 315,100,85);
+        seaweedOne14 = new GameObject(1, StringObjectValue.SEAWEED_TWO.getValue(), StringObjectValue.RIGHT.getValue(), 0,0,GameEngine.WIDTH + 845 + 150, 315,100,85);
+        seaweedTwo1 = new GameObject(1, StringObjectValue.SEAWEED_ONE.getValue(), StringObjectValue.RIGHT.getValue(),0,0, GameEngine.WIDTH + 250, 200, 200,200);
+        seaweedTwo2 = new GameObject(1, StringObjectValue.SEAWEED_ONE.getValue(), StringObjectValue.RIGHT.getValue(),0,0, GameEngine.WIDTH + 850, 200, 200,200);
 
     }
 

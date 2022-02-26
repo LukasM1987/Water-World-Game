@@ -3,8 +3,11 @@ package com.waterworld.menu;
 import com.waterworld.game_engine.GUIState;
 import com.waterworld.game_engine.GUIStateManager;
 import com.waterworld.game_engine.GameEngine;
+import com.waterworld.game_engine.StringObjectValue;
 import com.waterworld.game_objects.GameBubbles;
+import com.waterworld.game_objects.GameObject;
 import com.waterworld.game_objects.Sounds;
+import com.waterworld.level.Point;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -23,6 +26,7 @@ public class StatisticsDead extends GUIState {
     private static int currentChoice = 0;
 
     private BufferedImage background;
+    private GameObject deadFish;
 
     public StatisticsDead(GUIStateManager GUIStateManager) {
         this.GUIStateManager = GUIStateManager;
@@ -41,8 +45,10 @@ public class StatisticsDead extends GUIState {
 
     @Override
     public void update() {
+        deadFish.move();
         bubbles.move();
         transferObjects();
+        setDeadFishMove();
     }
 
     @Override
@@ -51,7 +57,13 @@ public class StatisticsDead extends GUIState {
         g.setFont(new Font("Showcard Gothic", Font.PLAIN, 42));
         drawMenuOptions(g);
         bubbles.drawBack(g);
-        //Mijesce na rybkę i informację
+        deadFish.draw(g);
+        g.setColor(new Color(225, 74, 83));
+        g.drawString("YOUR TOTAL SCORES", 190, 50);
+        g.drawString("IN FIRST LEVEL" , 254, 100);
+        g.setFont(new Font("Showcard Gothic", Font.PLAIN, 80));
+        Point.getPoints().add(1);
+        g.drawString(String.valueOf(Point.getPoints().get(0)),380,210);
         bubbles.drawFront(g);
     }
 
@@ -98,6 +110,7 @@ public class StatisticsDead extends GUIState {
     private int selectMenuOption(){
         if(currentChoice == 0){
             GUIStateManager.setStates(com.waterworld.game_engine.GUIStateManager.LEVEL_ONE);
+            Point.getPoints().remove(0);
             MainMenu.playLevelMusic();
         }
 
@@ -110,9 +123,19 @@ public class StatisticsDead extends GUIState {
 
     private void setObjects() {
         bubbles.init();
+        deadFish = new GameObject(1, StringObjectValue.DEAD_FISH.getValue(), StringObjectValue.UP.getValue(), 0, 0, 250, 150,90, 65);
     }
 
     private void transferObjects() {
         bubbles.transfer();
+    }
+
+    private void setDeadFishMove() {
+        if (deadFish.getVerticalPos() <= 100) {
+            deadFish.setYDirection(-deadFish.getYVelocity());
+        }
+        if (deadFish.getVerticalPos() >= 190) {
+            deadFish.setYDirection(-deadFish.getYVelocity());
+        }
     }
 }
