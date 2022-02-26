@@ -21,6 +21,8 @@ public class GameObject {
     private static final File seaWeedOne = new File("src/main/resources/game_objects/level_objects/seaweed 1.png");
     private static final File seaWeedTwo = new File("src/main/resources/game_objects/level_objects/seaweed 2.png");
     private static final File deadFish = new File("src/main/resources/game_objects/level_objects/dead fish.png");
+    private static final File rockOne = new File("src/main/resources/game_objects/level_objects/rock 1.png");
+    private static final File rockTwo = new File("src/main/resources/game_objects/level_objects/rock 2.png");
 
     private int initialSpeed;
 
@@ -46,6 +48,8 @@ public class GameObject {
     private BufferedImage seaWeedOneIcon;
     private BufferedImage seaWeedTwoIcon;
     private BufferedImage deadFishIcon;
+    private BufferedImage rockOneImg;
+    private BufferedImage rockTwoImg;
 
     public GameObject(int initialSpeed, String objectName, String direction, int directionX, int directionY, int xPosition, int yPosition, int xSize, int ySize) {
         this.rectangle = new Rectangle(xPosition, yPosition, xSize, ySize);
@@ -72,6 +76,8 @@ public class GameObject {
             seaWeedOneIcon = ImageIO.read(seaWeedOne);
             seaWeedTwoIcon = ImageIO.read(seaWeedTwo);
             deadFishIcon = ImageIO.read(deadFish);
+            rockOneImg = ImageIO.read(rockOne);
+            rockTwoImg = ImageIO.read(rockTwo);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -87,6 +93,9 @@ public class GameObject {
                 verticalDirection--;
             }
             setYDirection(verticalDirection * initialSpeed);
+        }
+        if (direction.equals("up and down")) {
+
         }
 
         if (direction.equals("up")) {
@@ -166,6 +175,10 @@ public class GameObject {
            g.drawImage(seaWeedTwoIcon, rectangle.x, rectangle.y, null);
        } else if (objectName.equals("dead fish")) {
            g.drawImage(deadFishIcon, rectangle.x, rectangle.y, null);
+       } else if (objectName.equals("rock one")) {
+           g.drawImage(rockOneImg, rectangle.x, rectangle.y, null);
+       } else if (objectName.equals("rock two")) {
+           g.drawImage(rockTwoImg, rectangle.x, rectangle.y, null);
        }
     }
 

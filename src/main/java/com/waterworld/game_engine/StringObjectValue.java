@@ -25,7 +25,10 @@ public enum StringObjectValue {
     LEFT_INFO ("left info"),
     RIGHT_INFO ("right info"),
     DOWN_INFO ("down info"),
-    UP_INFO ("up info");
+    UP_INFO ("up info"),
+    ROCK_ONE ("rock one"),
+    ROCK_TWO ("rock two"),
+    DEAD_FISH ("dead fish");
 
     private String value;
 

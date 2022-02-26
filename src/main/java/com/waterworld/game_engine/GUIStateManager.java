@@ -34,7 +34,6 @@ public class GUIStateManager {
         gamesStates.add(new Help(this));
         gamesStates.add(new LevelOne(this));
         gamesStates.add(new StatisticsDead(this));
-
     }
 
     public void setStates(int state) {
