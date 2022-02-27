@@ -104,6 +104,7 @@ public class Help extends GUIState {
         rightMoveInfo.setVerticalPosition(450);
         downMoveInfo.setVerticalPosition(450);
         upMoveInfo.setVerticalPosition(450);
+        bubbles.moveOutOfFrame();
         GUIStateManager.setStates(com.waterworld.game_engine.GUIStateManager.MENU);
     }
 
@@ -123,12 +124,12 @@ public class Help extends GUIState {
 
     private void setObjects() {
         bubbles.init();
-        leftButton = new GameObject(2, StringObjectValue.LEFT_BUTTON.getValue(), StringObjectValue.LEFT.getValue(), 0, 0, -50, 150, 50, 50);
-        rightButton = new GameObject(2, StringObjectValue.RIGHT_BUTTON.getValue(), StringObjectValue.RIGHT.getValue(), 0, 0, 800, 150, 50, 50);
-        downButton = new GameObject(2, StringObjectValue.DOWN_BUTTON.getValue(), StringObjectValue.UP.getValue(), 0,0, GameEngine.WIDTH / 2 - 25, 480, 50, 50);
-        upButton = new GameObject(2, StringObjectValue.UP_BUTTON.getValue(), StringObjectValue.DOWN.getValue(), 0,0, GameEngine.WIDTH / 2 - 25, -250, 50, 50);
-        leftMoveInfo = new GameObject(1, StringObjectValue.LEFT_INFO.getValue(), StringObjectValue.LEFT.getValue(), 0,0, -100, 190, 50, 50);
-        rightMoveInfo = new GameObject(1, StringObjectValue.RIGHT_INFO.getValue(), StringObjectValue.RIGHT.getValue(), 0,0, 820, 190, 50, 50);
+        leftButton = new GameObject(2, StringObjectValue.LEFT_BUTTON.getValue(), StringObjectValue.LEFT.getValue(), 0, 0, -150, 150, 50, 50);
+        rightButton = new GameObject(2, StringObjectValue.RIGHT_BUTTON.getValue(), StringObjectValue.RIGHT.getValue(), 0, 0, 900, 150, 50, 50);
+        downButton = new GameObject(2, StringObjectValue.DOWN_BUTTON.getValue(), StringObjectValue.UP.getValue(), 0,0, GameEngine.WIDTH / 2 - 25, 500, 50, 50);
+        upButton = new GameObject(2, StringObjectValue.UP_BUTTON.getValue(), StringObjectValue.DOWN.getValue(), 0,0, GameEngine.WIDTH / 2 - 25, -270, 50, 50);
+        leftMoveInfo = new GameObject(1, StringObjectValue.LEFT_INFO.getValue(), StringObjectValue.LEFT.getValue(), 0,0, -150, 190, 50, 50);
+        rightMoveInfo = new GameObject(1, StringObjectValue.RIGHT_INFO.getValue(), StringObjectValue.RIGHT.getValue(), 0,0, 870, 190, 50, 50);
         downMoveInfo = new GameObject(1, StringObjectValue.DOWN_INFO.getValue(), StringObjectValue.ANY_DIRECTION.getValue(), 1,1, 0, -100, 50, 50);
         upMoveInfo = new GameObject(1, StringObjectValue.UP_INFO.getValue(), StringObjectValue.DOWN.getValue(), 0,0, GameEngine.WIDTH / 2 - 24, -276, 50, 50);
     }

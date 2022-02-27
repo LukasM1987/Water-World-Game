@@ -124,6 +124,8 @@ public class GameBubbles {
         bubble16x16Two.setVerticalPosition(-100);
         bubble24x24One.setVerticalPosition(-100);
         bubble24x24Two.setVerticalPosition(-100);
-        bubble36x36One.setVerticalPosition(-100);
+        if (isLevel) {
+            bubble36x36One.setVerticalPosition(-100);
+        }
     }
 }
