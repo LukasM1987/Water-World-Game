@@ -11,9 +11,9 @@ public class Point {
     private static List<Integer> points = new ArrayList<>();
 
     private String level;
-    private int score;
-    private int scoresInFirstLevel;
-    private int life = 3;
+    private static int score;
+    private static int scoresInFirstLevel;
+    private static int life;
 
     public Point(String level) {
         this.level = level;
@@ -46,6 +46,16 @@ public class Point {
         return score;
     }
 
+    public static int zeroScore() {
+        score = 0;
+        return score;
+    }
+
+    public static int zeroScoreInLevel() {
+        scoresInFirstLevel = 0;
+        return scoresInFirstLevel;
+    }
+
     public int gainScoresInFirstLevel() {
         return scoresInFirstLevel++;
     }
@@ -58,7 +68,7 @@ public class Point {
         return life--;
     }
 
-    public int getLife() {
+    public static int getLife() {
         return life;
     }
 
@@ -66,20 +76,12 @@ public class Point {
         return life++;
     }
 
-    public void setLife(int life) {
-        this.life = life;
-    }
-
-    public void setScore(int score) {
-        this.score = score;
+    public static void setLife(int life) {
+        Point.life = life;
     }
 
     public static List<Integer> getPoints() {
         return points;
-    }
-
-    public void setScoresInFirstLevel(int scoresInFirstLevel) {
-        this.scoresInFirstLevel = scoresInFirstLevel;
     }
 }
 

@@ -13,19 +13,18 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.util.Random;
 
-public class LevelOne extends GUIState {
+public class LevelTwo extends GUIState {
 
-    private static final Point point = new Point(StringObjectValue.LEVEL_ONE.getValue());
+    private static final Point point = new Point(StringObjectValue.LEVEL_TWO.getValue());
     private static final GameBubbles levelBubbles = new GameBubbles(true);
-    private static final LevelSeaweed levelSeaweed = new LevelSeaweed();
     private static final Sounds sounds = new Sounds();
     private static final Random random = new Random();
-    private static final File background = new File("src/main/resources/game_objects/level_objects/level_one_800x400.jpg");
+    private static final File background = new File("src/main/resources/game_objects/level_objects/level_two_800x450.jpg");
     private static final File wormPoints = new File("src/main/resources/game_objects/points/worm points 30x30.png");
     private static final File life = new File("src/main/resources/game_objects/points/life.png");
 
     private static final int MINUS_THIRTY_TWO = -32;
-    private static final int MAX_POINTS = 5;
+    private static final int MAX_POINTS = 10;
     private static final int MINUS_ONE_HUNDRED_TWENTY = -120;
     private static final int GIVE_LIFE = 10;
     private static final int INITIAL_PLAYER_LIFE = 3;
@@ -36,16 +35,18 @@ public class LevelOne extends GUIState {
     private BufferedImage wormIcon;
     private BufferedImage lifeIcon;
 
-    private GameObject enemySkin;
+    private GameObject enemyOneSkin;
+    private GameObject enemyTwoSkin;
     private GameObject worm;
     private GameObject rockOne;
     private GameObject rockTwo;
-    private Enemy enemy;
+    private Enemy enemyOne;
+    private Enemy enemyTwo;
 
     private Player player;
     private int gainLife;
 
-    public LevelOne(com.waterworld.game_engine.GUIStateManager GUIStateManager) {
+    public LevelTwo(com.waterworld.game_engine.GUIStateManager GUIStateManager) {
         this.GUIStateManager = GUIStateManager;
         init();
     }
@@ -54,7 +55,6 @@ public class LevelOne extends GUIState {
     public void init() {
         setObjects();
         newPlayer();
-        Point.setLife(INITIAL_PLAYER_LIFE);
         try {
             backgroundImage = ImageIO.read(background);
             wormIcon = ImageIO.read(wormPoints);
@@ -71,9 +71,10 @@ public class LevelOne extends GUIState {
         player.verticalMove();
         rockTwo.move();
         worm.move();
-        enemy.move();
-        enemySkin.move();
-        levelSeaweed.move();
+        enemyOne.move();
+        enemyOneSkin.move();
+        enemyTwo.move();
+        enemyTwoSkin.move();
         rockOne.move();
         givePoint();
         giveLife();
@@ -84,13 +85,14 @@ public class LevelOne extends GUIState {
 
     @Override
     public void draw(Graphics g) {
-        enemy.draw(g);
+        enemyOne.draw(g);
+        enemyTwo.draw(g);
         g.drawImage(backgroundImage, 0, 0, null);
         levelBubbles.drawBack(g);
         rockTwo.draw(g);
-        levelSeaweed.drawFront(g);
         rockOne.draw(g);
-        enemySkin.draw(g);
+        enemyOneSkin.draw(g);
+        enemyTwoSkin.draw(g);
         worm.draw(g);
         player.draw(g);
         g.drawImage(wormIcon, 10, 10, null);
@@ -115,35 +117,51 @@ public class LevelOne extends GUIState {
 
     private void setObjects() {
         levelBubbles.init();
-        levelSeaweed.init();
         worm = new GameObject(1, StringObjectValue.WORM.getValue(), StringObjectValue.RIGHT.getValue(), 0,0, 840, 180, 27,30);
-        enemy = new Enemy(3, 1000, 200, 115, 124);
-        enemySkin = new GameObject(3, StringObjectValue.ENEMY.getValue(), StringObjectValue.RIGHT.getValue(), 0,0, 1000, 195, 120,131);
-        rockOne = new GameObject(1, StringObjectValue.ROCK_ONE.getValue(), StringObjectValue.RIGHT.getValue(), 0, 0, GameEngine.WIDTH + 30, 350, 153, 71);
-        rockTwo = new GameObject(1, StringObjectValue.ROCK_TWO.getValue(), StringObjectValue.RIGHT.getValue(), 0, 0, GameEngine.WIDTH + 300, GameEngine.HEIGHT - 140, 174, 225);
+        enemyOne = new Enemy(2, 1335, 30, 80, 90);
+        enemyOneSkin = new GameObject(2, StringObjectValue.ENEMY_TWO.getValue(), StringObjectValue.RIGHT.getValue(), 0,0, 1300, -15, 120,131);
+        enemyTwo = new Enemy(4, 1035, 240, 80, 90);
+        enemyTwoSkin = new GameObject(4, StringObjectValue.ENEMY_TWO.getValue(), StringObjectValue.RIGHT.getValue(), 0,0, 1000, 195, 120,131);
+        rockOne = new GameObject(1, StringObjectValue.ROCK_ONE.getValue(), StringObjectValue.RIGHT.getValue(), 0, 0, GameEngine.WIDTH + 30, 354, 153, 71);
+        rockTwo = new GameObject(1, StringObjectValue.ROCK_TWO.getValue(), StringObjectValue.RIGHT.getValue(), 0, 0, GameEngine.WIDTH + 356, GameEngine.HEIGHT - 136, 174, 225);
 
     }
 
     private void transferObjects() {
         levelBubbles.transfer();
-        levelSeaweed.transfer();
         if (worm.getHorizontalPos() <= MINUS_THIRTY_TWO || worm.intersects(player.getRectangle())) {
             worm.setHorizontalPosition(random.nextInt(400) + 800);
             worm.setVerticalPosition(random.nextInt(320));
             point.gainScoresInFirstLevel();
         }
-        if (enemy.intersects(player.getRectangle())) {
+        if (enemyOne.intersects(player.getRectangle())) {
             point.takeLife();
             sounds.hurtPlayerSound();
-            enemy.setVerticalPosition(-200);
+            enemyOne.setVerticalPosition(-200);
         }
-        if (enemy.getHorizontalPos() <= MINUS_ONE_HUNDRED_TWENTY) {
-            int yPos = random.nextInt(260);
+        if (enemyTwo.intersects(player.getRectangle())) {
+            point.takeLife();
+            sounds.hurtPlayerSound();
+            enemyTwo.setVerticalPosition(-200);
+        }
+        if (enemyOne.getHorizontalPos() <= MINUS_ONE_HUNDRED_TWENTY) {
+            int yPos = random.nextInt(230);
             int xPos = random.nextInt(800) + 800;
-            enemy.setVerticalPosition(yPos);
-            enemy.setHorizontalPosition(xPos);
-            enemySkin.setVerticalPosition(yPos - 6);
-            enemySkin.setHorizontalPosition(xPos - 5);
+            enemyOne.setVerticalPosition(yPos);
+            enemyOne.setHorizontalPosition(xPos);
+            enemyOneSkin.setVerticalPosition(yPos - 46);
+            enemyOneSkin.setHorizontalPosition(xPos - 35);
+        }
+        if (enemyTwo.getHorizontalPos() <= MINUS_ONE_HUNDRED_TWENTY) {
+            int yPos = random.nextInt(230);
+            int xPos = random.nextInt(800) + 800;
+            enemyTwo.setVerticalPosition(yPos);
+            enemyTwo.setHorizontalPosition(xPos);
+            enemyTwoSkin.setVerticalPosition(yPos - 46);
+            enemyTwoSkin.setHorizontalPosition(xPos - 35);
+        }
+        if (rockOne.getHorizontalPos() <= MINUS_ONE_HUNDRED_TWENTY) {
+            rockOne.setHorizontalPosition(random.nextInt(50) + 800);
         }
         if (rockTwo.getHorizontalPos() <= -200) {
             rockTwo.setHorizontalPosition(random.nextInt(800) + 974);
@@ -179,21 +197,23 @@ public class LevelOne extends GUIState {
     private void endLevel() {
         if (point.getScoresInLevel() == MAX_POINTS) {
             stopMusic();
+            zeroLife();
             win = true;
             Point.getPoints().add(point.getScore());
-            zeroLife();
             removeObjects();
             newPlayer();
-            GUIStateManager.setStates(com.waterworld.game_engine.GUIStateManager.STATISTICS_LEVEL_ONE);
+            GUIStateManager.setStates(com.waterworld.game_engine.GUIStateManager.STATISTICS_LEVEL_TWO);
 
         } else if (Point.getLife() == 0) {
             win = false;
             zeroLife();
             stopMusic();
+            Point.setLife(INITIAL_PLAYER_LIFE);
             Point.getPoints().add(point.getScore());
             removeObjects();
             newPlayer();
-            GUIStateManager.setStates(com.waterworld.game_engine.GUIStateManager.STATISTICS_LEVEL_ONE);
+            GUIStateManager.setStates(com.waterworld.game_engine.GUIStateManager.STATISTICS_LEVEL_TWO);
+
         }
     }
 
@@ -215,15 +235,17 @@ public class LevelOne extends GUIState {
     }
 
     private void removeObjects() {
-        enemySkin.setHorizontalPosition(900);
-        enemy.setHorizontalPosition(900);
+        enemyOne.setHorizontalPosition(900);
+        enemyOneSkin.setHorizontalPosition(900);
+        enemyTwoSkin.setHorizontalPosition(900);
+        enemyTwo.setHorizontalPosition(900);
         worm.setHorizontalPosition(900);
         player.setHorizontalPosition(150);
         player.setVerticalPosition(150);
         player.setXDirection(0);
         player.setYDirection(0);
-        levelSeaweed.moveOutOfFrame();
         levelBubbles.moveOutOfFrame();
+        rockOne.setVerticalPosition(GameEngine.HEIGHT);
         rockTwo.setVerticalPosition(GameEngine.HEIGHT);
     }
 
