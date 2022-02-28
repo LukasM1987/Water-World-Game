@@ -7,6 +7,7 @@ import com.waterworld.game_engine.StringObjectValue;
 import com.waterworld.game_objects.GameBubbles;
 import com.waterworld.game_objects.GameObject;
 import com.waterworld.game_objects.Sounds;
+import com.waterworld.level.LevelOne;
 import com.waterworld.level.Point;
 
 import javax.imageio.ImageIO;
@@ -16,20 +17,24 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
-public class StatisticsDead extends GUIState {
+public class Statistics extends GUIState {
 
     private static final Sounds sounds = new Sounds();
     private static final GameBubbles bubbles = new GameBubbles(false);
     private static final File backgroundFile = new File("src/main/resources/game_objects/level_objects/Statistics dead background 800x403.jpg");
-    private static final String[] options = {"REPEAT  GAME", "QUIT TO MENU"};
+    private static final String[] optionsDead = {"REPEAT  GAME", "QUIT TO MENU"};
+    private static final String[] optionsWin = {"   NEXT  LEVEL", "QUIT TO MENU"};
 
     private static int currentChoice = 0;
 
     private BufferedImage background;
     private GameObject deadFish;
+    private GameObject fish;
+    private String level;
 
-    public StatisticsDead(GUIStateManager GUIStateManager) {
+    public Statistics(GUIStateManager GUIStateManager, String level) {
         this.GUIStateManager = GUIStateManager;
+        this.level = level;
         init();
     }
 
@@ -45,10 +50,14 @@ public class StatisticsDead extends GUIState {
 
     @Override
     public void update() {
-        deadFish.move();
+        moveFish();
         bubbles.move();
         transferObjects();
-        setDeadFishMove();
+        if (LevelOne.isWin()) {
+            setFishMove();
+        } else {
+            setDeadFishMove();
+        }
     }
 
     @Override
@@ -57,13 +66,18 @@ public class StatisticsDead extends GUIState {
         g.setFont(new Font("Showcard Gothic", Font.PLAIN, 42));
         drawMenuOptions(g);
         bubbles.drawBack(g);
-        deadFish.draw(g);
+        drawFish(g);
         g.setColor(new Color(225, 74, 83));
         g.drawString("YOUR TOTAL SCORES", 190, 50);
         g.drawString("IN FIRST LEVEL" , 254, 100);
         g.setFont(new Font("Showcard Gothic", Font.PLAIN, 80));
-        Point.getPoints().add(1);
-        g.drawString(String.valueOf(Point.getPoints().get(0)),380,210);
+        if (level.equals("level one")) {
+            g.drawString(String.valueOf(Point.getPoints().get(0)), 380, 210);
+        } else if (level.equals("level two")) {
+            g.drawString(String.valueOf(Point.getPoints().get(1)), 380, 210);
+        } else if (level.equals("level three")) {
+            g.drawString(String.valueOf(Point.getPoints().get(2)), 380, 210);
+        }
         bubbles.drawFront(g);
     }
 
@@ -78,14 +92,14 @@ public class StatisticsDead extends GUIState {
             currentChoice--;
             sounds.setNavigationSound();
             if (currentChoice == -1) {
-                currentChoice = options.length - 1;
+                currentChoice = optionsDead.length - 1;
             }
         }
 
         if (key.getKeyCode() == KeyEvent.VK_DOWN || key.getKeyCode() == KeyEvent.VK_S) {
             currentChoice++;
             sounds.setNavigationSound();
-            if (currentChoice == options.length) {
+            if (currentChoice == optionsDead.length) {
                 currentChoice = 0;
             }
         }
@@ -97,26 +111,42 @@ public class StatisticsDead extends GUIState {
     }
 
     private void drawMenuOptions(Graphics g) {
-        for (int i = 0; i < options.length; i++) {
-            if (i == currentChoice) {
-                g.setColor(new Color(248,174,71));
-            } else {
-                g.setColor(Color.WHITE);
+        if (LevelOne.isWin()) {
+            for (int i = 0; i < optionsWin.length; i++) {
+                if (i == currentChoice) {
+                    g.setColor(new Color(248, 174, 71));
+                } else {
+                    g.setColor(Color.WHITE);
+                }
+                g.drawString(optionsWin[i], (GameEngine.WIDTH / 2) - 140, 290 + i * 38);
             }
-            g.drawString(options[i], (GameEngine.WIDTH / 2) - 140, 290 + i * 38);
+        } else {
+            for (int i = 0; i < optionsDead.length; i++) {
+                if (i == currentChoice) {
+                    g.setColor(new Color(248, 174, 71));
+                } else {
+                    g.setColor(Color.WHITE);
+                }
+                g.drawString(optionsDead[i], (GameEngine.WIDTH / 2) - 140, 290 + i * 38);
+            }
         }
     }
 
     private int selectMenuOption(){
         if(currentChoice == 0){
-            GUIStateManager.setStates(com.waterworld.game_engine.GUIStateManager.LEVEL_ONE);
-            Point.getPoints().remove(0);
+            if (LevelOne.isWin()) {
+                System.out.println(Point.getPoints());
+            } else {
+                GUIStateManager.setStates(com.waterworld.game_engine.GUIStateManager.LEVEL_ONE);
+                Point.getPoints().remove(0);
+            }
             MainMenu.playLevelMusic();
         }
 
         if (currentChoice == 1) {
             GUIStateManager.setStates(com.waterworld.game_engine.GUIStateManager.MENU);
             com.waterworld.game_engine.GUIStateManager.playMainMenuMusic();
+            Point.getPoints().clear();
         }
         return currentChoice;
     }
@@ -124,6 +154,7 @@ public class StatisticsDead extends GUIState {
     private void setObjects() {
         bubbles.init();
         deadFish = new GameObject(1, StringObjectValue.DEAD_FISH.getValue(), StringObjectValue.UP.getValue(), 0, 0, 250, 150,90, 65);
+        fish = new GameObject(1, StringObjectValue.FISH.getValue(), StringObjectValue.UP.getValue(), 0, 0, 250, 150,90, 65);
     }
 
     private void transferObjects() {
@@ -136,6 +167,31 @@ public class StatisticsDead extends GUIState {
         }
         if (deadFish.getVerticalPos() >= 190) {
             deadFish.setYDirection(-deadFish.getYVelocity());
+        }
+    }
+
+    private void setFishMove() {
+        if (fish.getVerticalPos() <= 100) {
+            fish.setYDirection(-fish.getYVelocity());
+        }
+        if (fish.getVerticalPos() >= 180) {
+            fish.setYDirection(-fish.getYVelocity());
+        }
+    }
+
+    private void drawFish(Graphics g) {
+        if (LevelOne.isWin()) {
+            fish.draw(g);
+        } else {
+            deadFish.draw(g);
+        }
+    }
+
+    private void moveFish() {
+        if (LevelOne.isWin()) {
+            fish.move();
+        } else {
+            deadFish.move();
         }
     }
 }

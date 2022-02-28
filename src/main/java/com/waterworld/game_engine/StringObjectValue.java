@@ -28,7 +28,8 @@ public enum StringObjectValue {
     UP_INFO ("up info"),
     ROCK_ONE ("rock one"),
     ROCK_TWO ("rock two"),
-    DEAD_FISH ("dead fish");
+    DEAD_FISH ("dead fish"),
+    FISH ("fish");
 
     private String value;
 

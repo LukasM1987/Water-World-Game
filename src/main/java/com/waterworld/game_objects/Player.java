@@ -9,7 +9,8 @@ import java.io.IOException;
 
 public class Player {
 
-    private static final File playerSkin = new File("src/main/resources/game_objects/player/unnamed.png");
+    private static final File playerSkinRight = new File("src/main/resources/game_objects/player/player right.png");
+    private static final File playerSkinLeft = new File("src/main/resources/game_objects/player/player left.png");
     private static final int STOP_PLAYER = 0;
     private static final int MOVE_UP_PLAYER = -1;
     private static final int MOVE_DOWN_PLAYER_FAST = 3;
@@ -20,11 +21,14 @@ public class Player {
     private int verticalVelocity;
 
     private int initialPlayerSpeed;
+    private int skinDirection;
 
-    private BufferedImage skin;
+    private BufferedImage skinRight;
+    private BufferedImage skinLeft;
 
-    public Player(int initialXPosition, int initialYPosition, int WIDTH, int HEIGHT, int initialPlayerSpeed) {
+    public Player(int skinDirection, int initialXPosition, int initialYPosition, int WIDTH, int HEIGHT, int initialPlayerSpeed) {
         this.initialPlayerSpeed = initialPlayerSpeed;
+        this.skinDirection = skinDirection;
         this.rectangle = new Rectangle(initialXPosition, initialYPosition, WIDTH, HEIGHT);
     }
 
@@ -47,10 +51,12 @@ public class Player {
 
         if (key.getKeyCode() == KeyEvent.VK_RIGHT) {
             setXDirection(initialPlayerSpeed);
+            skinDirection = 0;
         }
 
         if (key.getKeyCode() == KeyEvent.VK_LEFT) {
             setXDirection(-initialPlayerSpeed);
+            skinDirection = 1;
         }
     }
 
@@ -61,10 +67,12 @@ public class Player {
 
         if (key.getKeyCode() == KeyEvent.VK_RIGHT) {
             setXDirection(STOP_PLAYER);
+            skinDirection = 0;
         }
 
         if (key.getKeyCode() == KeyEvent.VK_LEFT) {
             setXDirection(STOP_PLAYER);
+            skinDirection = 1;
         }
         setYDirection(MOVE_DOWN_PLAYER_SLOWLY);
     }
@@ -83,7 +91,12 @@ public class Player {
 
     public void draw(Graphics g) {
         initSkin();
-        g.drawImage(skin, rectangle.x, rectangle.y, null);
+        if (skinDirection == 0) {
+            g.drawImage(skinRight, rectangle.x, rectangle.y, null);
+        }
+        if (skinDirection == 1) {
+            g.drawImage(skinLeft, rectangle.x, rectangle.y, null);
+        }
     }
 
     public Rectangle getRectangle() {
@@ -108,7 +121,8 @@ public class Player {
 
     private void initSkin() {
         try {
-            skin = ImageIO.read(playerSkin);
+            skinRight = ImageIO.read(playerSkinRight);
+            skinLeft = ImageIO.read(playerSkinLeft);
         } catch (IOException e) {
             e.printStackTrace();
         }

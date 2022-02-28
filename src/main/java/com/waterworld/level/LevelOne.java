@@ -25,9 +25,11 @@ public class LevelOne extends GUIState {
     private static final File life = new File("src/main/resources/game_objects/points/life.png");
 
     private static final int MINUS_THIRTY_TWO = -32;
-    private static final int MAX_POINTS = 50;
+    private static final int MAX_POINTS = 5;
     private static final int MINUS_ONE_HUNDRED_TWENTY = -120;
     private static final int GIVE_LIFE = 10;
+
+    private static boolean win;
 
     private BufferedImage backgroundImage;
     private BufferedImage wormIcon;
@@ -44,7 +46,7 @@ public class LevelOne extends GUIState {
 
     public LevelOne(com.waterworld.game_engine.GUIStateManager GUIStateManager) {
         this.GUIStateManager = GUIStateManager;
-        this.player = new Player(150, 150, 95,80, 2);
+        this.player = new Player(0,150, 150, 95,80, 2);
         init();
     }
 
@@ -103,6 +105,10 @@ public class LevelOne extends GUIState {
     @Override
     public void onKeyReleased(KeyEvent key) {
         player.stopPlayer(key);
+    }
+
+    public static boolean isWin() {
+        return win;
     }
 
     private void setObjects() {
@@ -171,15 +177,17 @@ public class LevelOne extends GUIState {
     private void endLevel() {
         if (point.getScoresInLevel() == MAX_POINTS) {
             stopMusic();
-            point.getPoints().add(point.getScoresInLevel());
-            point.setScoresInFirstLevel(0);
+            win = true;
+            Point.getPoints().add(point.getScore());
+            GUIStateManager.setStates(com.waterworld.game_engine.GUIStateManager.STATISTICS);
 
         } else if (point.getLife() == 0) {
+            win = false;
             zeroLife();
             stopMusic();
             point.setLife(3);
+            Point.getPoints().add(point.getScore());
             point.setScore(0);
-            point.getPoints().add(point.getScoresInLevel());
             enemySkin.setHorizontalPosition(900);
             enemy.setHorizontalPosition(900);
             worm.setHorizontalPosition(900);
@@ -190,7 +198,7 @@ public class LevelOne extends GUIState {
             levelSeaweed.moveOutOfFrame();
             levelBubbles.moveOutOfFrame();
             rockTwo.setVerticalPosition(GameEngine.HEIGHT);
-            GUIStateManager.setStates(com.waterworld.game_engine.GUIStateManager.STATISTICS_DEAD);
+            GUIStateManager.setStates(com.waterworld.game_engine.GUIStateManager.STATISTICS);
         }
     }
 
