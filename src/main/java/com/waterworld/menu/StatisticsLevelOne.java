@@ -8,6 +8,7 @@ import com.waterworld.game_objects.GameBubbles;
 import com.waterworld.game_objects.GameObject;
 import com.waterworld.game_objects.Sounds;
 import com.waterworld.level.LevelOne;
+import com.waterworld.level.LevelTwo;
 import com.waterworld.level.Point;
 
 import javax.imageio.ImageIO;
@@ -17,24 +18,23 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
-public class Statistics extends GUIState {
+public class StatisticsLevelOne extends GUIState {
 
     private static final Sounds sounds = new Sounds();
     private static final GameBubbles bubbles = new GameBubbles(false);
     private static final File backgroundFile = new File("src/main/resources/game_objects/level_objects/Statistics dead background 800x403.jpg");
     private static final String[] optionsDead = {"REPEAT  GAME", "QUIT TO MENU"};
     private static final String[] optionsWin = {"   NEXT  LEVEL", "QUIT TO MENU"};
+    private static final int INITIAL_PLAYER_LIFE = 3;
 
     private static int currentChoice = 0;
 
     private BufferedImage background;
     private GameObject deadFish;
     private GameObject fish;
-    private String level;
 
-    public Statistics(GUIStateManager GUIStateManager, String level) {
+    public StatisticsLevelOne(GUIStateManager GUIStateManager) {
         this.GUIStateManager = GUIStateManager;
-        this.level = level;
         init();
     }
 
@@ -71,13 +71,7 @@ public class Statistics extends GUIState {
         g.drawString("YOUR TOTAL SCORES", 190, 50);
         g.drawString("IN FIRST LEVEL" , 254, 100);
         g.setFont(new Font("Showcard Gothic", Font.PLAIN, 80));
-        if (level.equals("level one")) {
-            g.drawString(String.valueOf(Point.getPoints().get(0)), 380, 210);
-        } else if (level.equals("level two")) {
-            g.drawString(String.valueOf(Point.getPoints().get(1)), 380, 210);
-        } else if (level.equals("level three")) {
-            g.drawString(String.valueOf(Point.getPoints().get(2)), 380, 210);
-        }
+        g.drawString(String.valueOf(Point.getPoints().get(0)), 380, 210);
         bubbles.drawFront(g);
     }
 
@@ -135,8 +129,13 @@ public class Statistics extends GUIState {
     private int selectMenuOption(){
         if(currentChoice == 0){
             if (LevelOne.isWin()) {
-                System.out.println(Point.getPoints());
+                Point.zeroScore();
+                Point.zeroScoreInLevel();
+                GUIStateManager.setStates(com.waterworld.game_engine.GUIStateManager.LEVEL_TWO);
             } else {
+                Point.zeroScore();
+                Point.zeroScoreInLevel();
+                Point.setLife(INITIAL_PLAYER_LIFE);
                 GUIStateManager.setStates(com.waterworld.game_engine.GUIStateManager.LEVEL_ONE);
                 Point.getPoints().remove(0);
             }
@@ -144,9 +143,13 @@ public class Statistics extends GUIState {
         }
 
         if (currentChoice == 1) {
+            Point.zeroScore();
+            Point.zeroScoreInLevel();
+            Point.getPoints().clear();
+            Point.setLife(INITIAL_PLAYER_LIFE);
             GUIStateManager.setStates(com.waterworld.game_engine.GUIStateManager.MENU);
             com.waterworld.game_engine.GUIStateManager.playMainMenuMusic();
-            Point.getPoints().clear();
+
         }
         return currentChoice;
     }
@@ -180,7 +183,7 @@ public class Statistics extends GUIState {
     }
 
     private void drawFish(Graphics g) {
-        if (LevelOne.isWin()) {
+        if (LevelOne.isWin() || LevelTwo.isWin()) {
             fish.draw(g);
         } else {
             deadFish.draw(g);
@@ -188,7 +191,7 @@ public class Statistics extends GUIState {
     }
 
     private void moveFish() {
-        if (LevelOne.isWin()) {
+        if (LevelOne.isWin() || LevelTwo.isWin()) {
             fish.move();
         } else {
             deadFish.move();

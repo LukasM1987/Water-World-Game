@@ -6,6 +6,7 @@ public enum StringObjectValue {
     RIGHT ("right"),
     LEFT ("left"),
     ENEMY ("enemy"),
+    ENEMY_TWO ("enemy two"),
     BUBBLE_8X8 ("bubble8x8"),
     BUBBLE_16X16 ("bubble16x16"),
     BUBBLE_24X24 ("bubble24x24"),

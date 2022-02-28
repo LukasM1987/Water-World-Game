@@ -17,7 +17,8 @@ public class GameObject {
     private static final File downButton = new File("src/main/resources/game_objects/menu/down button.png");
     private static final File upButton = new File("src/main/resources/game_objects/menu/up button.png");
     private static final File worm = new File("src/main/resources/game_objects/points/worm 27x30.png");
-    private static final File enemy = new File("src/main/resources/game_objects/enemies/Enemy one.png");
+    private static final File enemyOne = new File("src/main/resources/game_objects/enemies/Enemy one.png");
+    private static final File enemyTwo = new File("src/main/resources/game_objects/enemies/Enemy two.png");
     private static final File seaWeedOne = new File("src/main/resources/game_objects/level_objects/seaweed 1.png");
     private static final File seaWeedTwo = new File("src/main/resources/game_objects/level_objects/seaweed 2.png");
     private static final File deadFish = new File("src/main/resources/game_objects/level_objects/dead fish.png");
@@ -46,7 +47,8 @@ public class GameObject {
     private BufferedImage down;
     private BufferedImage up;
     private BufferedImage wormIcon;
-    private BufferedImage enemyIcon;
+    private BufferedImage enemyOneIcon;
+    private BufferedImage enemyTwoIcon;
     private BufferedImage seaWeedOneIcon;
     private BufferedImage seaWeedTwoIcon;
     private BufferedImage deadFishIcon;
@@ -75,7 +77,8 @@ public class GameObject {
             down = ImageIO.read(downButton);
             up = ImageIO.read(upButton);
             wormIcon = ImageIO.read(worm);
-            enemyIcon = ImageIO.read(enemy);
+            enemyOneIcon = ImageIO.read(enemyOne);
+            enemyTwoIcon = ImageIO.read(enemyTwo);
             seaWeedOneIcon = ImageIO.read(seaWeedOne);
             seaWeedTwoIcon = ImageIO.read(seaWeedTwo);
             deadFishIcon = ImageIO.read(deadFish);
@@ -172,7 +175,7 @@ public class GameObject {
        } else if (objectName.equals("worm")) {
            g.drawImage(wormIcon, rectangle.x, rectangle.y, null);
        } else if (objectName.equals("enemy")) {
-           g.drawImage(enemyIcon, rectangle.x, rectangle.y, null);
+           g.drawImage(enemyOneIcon, rectangle.x, rectangle.y, null);
        } else if (objectName.equals("seaweed one")) {
            g.drawImage(seaWeedOneIcon, rectangle.x, rectangle.y, null);
        } else if (objectName.equals("seaweed two")) {
@@ -185,6 +188,8 @@ public class GameObject {
            g.drawImage(rockTwoImg, rectangle.x, rectangle.y, null);
        } else if (objectName.equals("fish")) {
            g.drawImage(fishIcon, rectangle.x, rectangle.y, null);
+       } else if (objectName.equals("enemy two")) {
+           g.drawImage(enemyTwoIcon, rectangle.x, rectangle.y, null);
        }
     }
 
