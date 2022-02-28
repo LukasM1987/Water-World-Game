@@ -23,6 +23,8 @@ public class GameObject {
     private static final File deadFish = new File("src/main/resources/game_objects/level_objects/dead fish.png");
     private static final File rockOne = new File("src/main/resources/game_objects/level_objects/rock 1.png");
     private static final File rockTwo = new File("src/main/resources/game_objects/level_objects/rock 2.png");
+    private static final File fish = new File("src/main/resources/game_objects/player/player right.png");
+
 
     private int initialSpeed;
 
@@ -50,6 +52,7 @@ public class GameObject {
     private BufferedImage deadFishIcon;
     private BufferedImage rockOneImg;
     private BufferedImage rockTwoImg;
+    private BufferedImage fishIcon;
 
     public GameObject(int initialSpeed, String objectName, String direction, int directionX, int directionY, int xPosition, int yPosition, int xSize, int ySize) {
         this.rectangle = new Rectangle(xPosition, yPosition, xSize, ySize);
@@ -78,6 +81,7 @@ public class GameObject {
             deadFishIcon = ImageIO.read(deadFish);
             rockOneImg = ImageIO.read(rockOne);
             rockTwoImg = ImageIO.read(rockTwo);
+            fishIcon = ImageIO.read(fish);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -179,6 +183,8 @@ public class GameObject {
            g.drawImage(rockOneImg, rectangle.x, rectangle.y, null);
        } else if (objectName.equals("rock two")) {
            g.drawImage(rockTwoImg, rectangle.x, rectangle.y, null);
+       } else if (objectName.equals("fish")) {
+           g.drawImage(fishIcon, rectangle.x, rectangle.y, null);
        }
     }
 
