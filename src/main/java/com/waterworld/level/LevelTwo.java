@@ -24,12 +24,13 @@ public class LevelTwo extends GUIState {
     private static final File life = new File("src/main/resources/game_objects/points/life.png");
 
     private static final int MINUS_THIRTY_TWO = -32;
-    private static final int MAX_POINTS = 10;
+    private static final int MAX_POINTS = 50;
     private static final int MINUS_ONE_HUNDRED_TWENTY = -120;
     private static final int GIVE_LIFE = 10;
     private static final int INITIAL_PLAYER_LIFE = 3;
 
     private static boolean win;
+    private static int levelTwo;
 
     private BufferedImage backgroundImage;
     private BufferedImage wormIcon;
@@ -115,6 +116,14 @@ public class LevelTwo extends GUIState {
         return win;
     }
 
+    public static int getLevelTwo() {
+        return levelTwo;
+    }
+
+    public static void setLevelTwo(int levelTwo) {
+        LevelTwo.levelTwo = levelTwo;
+    }
+
     private void setObjects() {
         levelBubbles.init();
         worm = new GameObject(1, StringObjectValue.WORM.getValue(), StringObjectValue.RIGHT.getValue(), 0,0, 840, 180, 27,30);
@@ -145,7 +154,7 @@ public class LevelTwo extends GUIState {
             enemyTwo.setVerticalPosition(-200);
         }
         if (enemyOne.getHorizontalPos() <= MINUS_ONE_HUNDRED_TWENTY) {
-            int yPos = random.nextInt(230);
+            int yPos = random.nextInt(230) + 20;
             int xPos = random.nextInt(800) + 800;
             enemyOne.setVerticalPosition(yPos);
             enemyOne.setHorizontalPosition(xPos);
@@ -153,7 +162,7 @@ public class LevelTwo extends GUIState {
             enemyOneSkin.setHorizontalPosition(xPos - 35);
         }
         if (enemyTwo.getHorizontalPos() <= MINUS_ONE_HUNDRED_TWENTY) {
-            int yPos = random.nextInt(230);
+            int yPos = random.nextInt(230) + 20;
             int xPos = random.nextInt(800) + 800;
             enemyTwo.setVerticalPosition(yPos);
             enemyTwo.setHorizontalPosition(xPos);
@@ -202,7 +211,8 @@ public class LevelTwo extends GUIState {
             Point.getPoints().add(point.getScore());
             removeObjects();
             newPlayer();
-            GUIStateManager.setStates(com.waterworld.game_engine.GUIStateManager.STATISTICS_LEVEL_TWO);
+            levelTwo = 2;
+            GUIStateManager.setStates(com.waterworld.game_engine.GUIStateManager.LEVEL_STATISTICS);
 
         } else if (Point.getLife() == 0) {
             win = false;
@@ -212,7 +222,8 @@ public class LevelTwo extends GUIState {
             Point.getPoints().add(point.getScore());
             removeObjects();
             newPlayer();
-            GUIStateManager.setStates(com.waterworld.game_engine.GUIStateManager.STATISTICS_LEVEL_TWO);
+            levelTwo = 2;
+            GUIStateManager.setStates(com.waterworld.game_engine.GUIStateManager.LEVEL_STATISTICS);
 
         }
     }

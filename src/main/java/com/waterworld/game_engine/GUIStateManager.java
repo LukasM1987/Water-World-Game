@@ -1,11 +1,11 @@
 package com.waterworld.game_engine;
 
 import com.waterworld.level.LevelOne;
+import com.waterworld.level.LevelThree;
 import com.waterworld.level.LevelTwo;
 import com.waterworld.menu.Help;
 import com.waterworld.menu.MainMenu;
-import com.waterworld.menu.StatisticsLevelOne;
-import com.waterworld.menu.StatisticsLevelTwo;
+import com.waterworld.menu.LevelStatistics;
 
 import javax.sound.sampled.*;
 import java.awt.*;
@@ -24,23 +24,23 @@ public class GUIStateManager {
     public static final int MENU = 0;
     public static final int HELP = 1;
     public static final int LEVEL_ONE = 2;
-    public static final int STATISTICS_LEVEL_ONE = 3;
+    public static final int LEVEL_STATISTICS = 3;
     public static final int LEVEL_TWO = 4;
-    public static final int STATISTICS_LEVEL_TWO = 5;
-    public static final int LEVEL_THREE = 6;
+    public static final int LEVEL_THREE = 5;
 
     private int currentState;
     private static Clip clip;
 
     public GUIStateManager() {
-        currentState = MENU;
+        //currentState = MENU;
+        currentState = LEVEL_THREE;
         playMainMenuMusic();
         gamesStates.add(new MainMenu(this));
         gamesStates.add(new Help(this));
         gamesStates.add(new LevelOne(this));
-        gamesStates.add(new StatisticsLevelOne(this));
+        gamesStates.add(new LevelStatistics(this));
         gamesStates.add(new LevelTwo(this));
-        gamesStates.add(new StatisticsLevelTwo(this));
+        gamesStates.add(new LevelThree(this));
     }
 
     public void setStates(int state) {
