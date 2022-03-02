@@ -126,6 +126,7 @@ public class Help extends GUIState {
         }
         if (currentChoice == 1) {
             removeObjects();
+            MainMenu.setCurrentChoice(0);
             GUIStateManager.setStates(com.waterworld.game_engine.GUIStateManager.MENU);
         }
         return currentChoice;
