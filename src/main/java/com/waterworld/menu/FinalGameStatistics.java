@@ -23,7 +23,7 @@ import java.util.List;
 
 public class FinalGameStatistics extends GUIState {
 
-    private static final List<String> scores = new ArrayList<>();
+    private static List<String> scores = new ArrayList<>();
     private static final Sounds sounds = new Sounds();
     private static final GameBubbles bubbles = new GameBubbles(false);
     private static final File backgroundFile = new File("src/main/resources/game_objects/level_objects/Final statistics 800x405.jpg");
@@ -176,6 +176,7 @@ public class FinalGameStatistics extends GUIState {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        scores.clear();
         backToMainMenuNoSave();
     }
 

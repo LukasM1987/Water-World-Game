@@ -155,22 +155,12 @@ public class LevelStatistics extends GUIState {
         if (LevelOne.getLevelOne() == 1) {
             if(currentChoice == 0){
                 if (LevelOne.isWin()) {
-                    Point.zeroScore();
-                    Point.zeroScoreInLevel();
-                    LevelOne.setLevelOne(0);
-                    LevelTwo.setLevelTwo(0);
-                    LevelThree.setLevelThree(0);
-                    MainMenu.playLevelMusic();
+                    resetLevel();
                     GUIStateManager.setStates(com.waterworld.game_engine.GUIStateManager.LEVEL_TWO);
                 } else {
-                    Point.zeroScore();
-                    Point.zeroScoreInLevel();
-                    LevelOne.setLevelOne(0);
-                    LevelTwo.setLevelTwo(0);
-                    LevelThree.setLevelThree(0);
-                    Point.setLife(INITIAL_PLAYER_LIFE);
+                    resetLevel();
                     Point.getPoints().remove(0);
-                    MainMenu.playLevelMusic();
+                    Point.setLife(INITIAL_PLAYER_LIFE);
                     GUIStateManager.setStates(com.waterworld.game_engine.GUIStateManager.LEVEL_ONE);
                 }
             }
@@ -181,22 +171,12 @@ public class LevelStatistics extends GUIState {
         if (LevelTwo.getLevelTwo() == 2) {
             if(currentChoice == 0){
                 if (LevelTwo.isWin()) {
-                    Point.zeroScore();
-                    Point.zeroScoreInLevel();
-                    LevelOne.setLevelOne(0);
-                    LevelTwo.setLevelTwo(0);
-                    LevelThree.setLevelThree(0);
+                    resetLevel();
                     GUIStateManager.setStates(com.waterworld.game_engine.GUIStateManager.LEVEL_THREE);
-                    MainMenu.playLevelMusic();
                 } else {
-                    Point.zeroScore();
-                    Point.zeroScoreInLevel();
-                    Point.setLife(INITIAL_PLAYER_LIFE);
+                    resetLevel();
                     Point.getPoints().remove(1);
-                    LevelOne.setLevelOne(0);
-                    LevelTwo.setLevelTwo(0);
-                    LevelThree.setLevelThree(0);
-                    MainMenu.playLevelMusic();
+                    Point.setLife(INITIAL_PLAYER_LIFE);
                     GUIStateManager.setStates(com.waterworld.game_engine.GUIStateManager.LEVEL_TWO);
                 }
             }
@@ -206,14 +186,9 @@ public class LevelStatistics extends GUIState {
         }
         if (LevelThree.getLevelThree() == 3) {
             if(currentChoice == 0){
-                Point.zeroScore();
-                Point.zeroScoreInLevel();
-                Point.setLife(INITIAL_PLAYER_LIFE);
+                resetLevel();
                 Point.getPoints().remove(2);
-                LevelOne.setLevelOne(0);
-                LevelTwo.setLevelTwo(0);
-                LevelThree.setLevelThree(0);
-                MainMenu.playLevelMusic();
+                Point.setLife(INITIAL_PLAYER_LIFE);
                 GUIStateManager.setStates(com.waterworld.game_engine.GUIStateManager.LEVEL_THREE);
             }
             if (currentChoice == 1) {
@@ -322,5 +297,14 @@ public class LevelStatistics extends GUIState {
         Point.setLife(INITIAL_PLAYER_LIFE);
         GUIStateManager.setStates(com.waterworld.game_engine.GUIStateManager.MENU);
         com.waterworld.game_engine.GUIStateManager.playMainMenuMusic();
+    }
+
+    private void resetLevel() {
+        Point.zeroScore();
+        Point.zeroScoreInLevel();
+        LevelOne.setLevelOne(0);
+        LevelTwo.setLevelTwo(0);
+        LevelThree.setLevelThree(0);
+        MainMenu.playLevelMusic();
     }
 }
