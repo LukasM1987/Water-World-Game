@@ -31,7 +31,7 @@ public class Point {
         } else if (level.equals("level three")) {
             g.setColor(new Color(225, 74, 83));
             g.setFont(new Font("Showcard Gothic", Font.PLAIN, 28));
-            g.drawString(score / 10 + String.valueOf(score % 10) + "/100", (GameEngine.WIDTH / 16), 36);
+            g.drawString(score / 10 + String.valueOf(score % 10) + "/75", (GameEngine.WIDTH / 16), 36);
         }
         g.setColor(new Color(225, 74, 83));
         g.setFont(new Font("Showcard Gothic", Font.PLAIN, 28));

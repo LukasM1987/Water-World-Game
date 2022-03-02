@@ -3,6 +3,7 @@ package com.waterworld.game_engine;
 import com.waterworld.level.LevelOne;
 import com.waterworld.level.LevelThree;
 import com.waterworld.level.LevelTwo;
+import com.waterworld.menu.FinalGameStatistics;
 import com.waterworld.menu.Help;
 import com.waterworld.menu.MainMenu;
 import com.waterworld.menu.LevelStatistics;
@@ -27,13 +28,13 @@ public class GUIStateManager {
     public static final int LEVEL_STATISTICS = 3;
     public static final int LEVEL_TWO = 4;
     public static final int LEVEL_THREE = 5;
+    public static final int FINAL_GAME_STATISTICS = 6;
 
     private int currentState;
     private static Clip clip;
 
     public GUIStateManager() {
-        //currentState = MENU;
-        currentState = LEVEL_THREE;
+        currentState = MENU;
         playMainMenuMusic();
         gamesStates.add(new MainMenu(this));
         gamesStates.add(new Help(this));
@@ -41,6 +42,7 @@ public class GUIStateManager {
         gamesStates.add(new LevelStatistics(this));
         gamesStates.add(new LevelTwo(this));
         gamesStates.add(new LevelThree(this));
+        gamesStates.add(new FinalGameStatistics(this));
     }
 
     public void setStates(int state) {

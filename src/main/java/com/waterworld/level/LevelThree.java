@@ -1,9 +1,11 @@
 package com.waterworld.level;
 
 import com.waterworld.game_engine.GUIState;
+import com.waterworld.game_engine.GUIStateManager;
 import com.waterworld.game_engine.GameEngine;
 import com.waterworld.game_engine.StringObjectValue;
 import com.waterworld.game_objects.*;
+import com.waterworld.menu.LevelStatistics;
 import com.waterworld.menu.MainMenu;
 
 import javax.imageio.ImageIO;
@@ -24,7 +26,7 @@ public class LevelThree extends GUIState {
     private static final File life = new File("src/main/resources/game_objects/points/life.png");
 
     private static final int MINUS_THIRTY_TWO = -32;
-    private static final int MAX_POINTS = 100;
+    private static final int MAX_POINTS = 5;
     private static final int MINUS_ONE_HUNDRED_TWENTY = -120;
     private static final int GIVE_LIFE = 10;
     private static final int INITIAL_PLAYER_LIFE = 3;
@@ -41,6 +43,8 @@ public class LevelThree extends GUIState {
     private GameObject rockOne;
     private GameObject rockTwo;
     private GameObject rockThree;
+    private GameObject blueSeaweed;
+    private GameObject greenSeaweed;
     private Enemy enemyOne;
 
     private Player player;
@@ -72,6 +76,8 @@ public class LevelThree extends GUIState {
         rockOne.move();
         rockTwo.move();
         rockThree.move();
+        blueSeaweed.move();
+        greenSeaweed.move();
         worm.move();
         enemyOne.move();
         enemyOneSkin.move();
@@ -90,6 +96,8 @@ public class LevelThree extends GUIState {
         rockTwo.draw(g);
         rockOne.draw(g);
         rockThree.draw(g);
+        blueSeaweed.draw(g);
+        greenSeaweed.draw(g);
         enemyOneSkin.draw(g);
         worm.draw(g);
         player.draw(g);
@@ -126,10 +134,12 @@ public class LevelThree extends GUIState {
         worm = new GameObject(1, StringObjectValue.WORM.getValue(), StringObjectValue.RIGHT.getValue(), 0,0, 840, 180, 27,30);
         enemyOne = new Enemy(3, 1000, 200, 115, 124);
         enemyOneSkin = new GameObject(3, StringObjectValue.ENEMY.getValue(), StringObjectValue.RIGHT.getValue(), 0,0, 1000, 195, 120,131);
-
         rockOne = new GameObject(1, StringObjectValue.ROCK_ONE.getValue(), StringObjectValue.RIGHT.getValue(), 0, 0, GameEngine.WIDTH + 30, 354, 153, 71);
         rockTwo = new GameObject(1, StringObjectValue.ROCK_TWO.getValue(), StringObjectValue.RIGHT.getValue(), 0, 0, GameEngine.WIDTH + 356, GameEngine.HEIGHT - 136, 174, 225);
         rockThree = new GameObject(1, StringObjectValue.ROCK_ONE.getValue(), StringObjectValue.RIGHT.getValue(), 0, 0, GameEngine.WIDTH + 739, 354, 174, 225);
+        blueSeaweed = new GameObject(1, StringObjectValue.BLUE_SEAWEED.getValue(), StringObjectValue.RIGHT.getValue(), 0, 0, GameEngine.WIDTH + 190, GameEngine.HEIGHT - 84, 100, 100);
+        greenSeaweed = new GameObject(1, StringObjectValue.GREEN_SEAWEED.getValue(), StringObjectValue.RIGHT.getValue(), 0, 0, GameEngine.WIDTH + 620, GameEngine.HEIGHT - 74, 100, 100);
+
     }
 
     private void transferObjects() {
@@ -159,7 +169,12 @@ public class LevelThree extends GUIState {
             rockTwo.setHorizontalPosition(random.nextInt(800) + 974);
         }
         if (rockThree.getHorizontalPos() <= MINUS_ONE_HUNDRED_TWENTY) {
-            rockThree.setHorizontalPosition(random.nextInt(150) + 800);
+            rockThree.setHorizontalPosition(random.nextInt(450) + 800);
+        }
+        if (greenSeaweed.getHorizontalPos() <= MINUS_ONE_HUNDRED_TWENTY && blueSeaweed.getHorizontalPos() <= MINUS_ONE_HUNDRED_TWENTY) {
+            int xPos = random.nextInt(300) + 800;
+            blueSeaweed.setHorizontalPosition(xPos);
+            greenSeaweed.setHorizontalPosition(xPos + 370);
         }
     }
 
@@ -197,8 +212,8 @@ public class LevelThree extends GUIState {
             zeroLife();
             removeObjects();
             newPlayer();
-            levelThree = 3;
-            GUIStateManager.setStates(com.waterworld.game_engine.GUIStateManager.LEVEL_STATISTICS);
+            LevelStatistics.setCurrentChoice(0);
+            GUIStateManager.setStates(com.waterworld.game_engine.GUIStateManager.FINAL_GAME_STATISTICS);
         } else if (Point.getLife() == 0) {
             win = false;
             zeroLife();
@@ -208,6 +223,7 @@ public class LevelThree extends GUIState {
             removeObjects();
             newPlayer();
             levelThree = 3;
+            LevelStatistics.setCurrentChoice(0);
             GUIStateManager.setStates(com.waterworld.game_engine.GUIStateManager.LEVEL_STATISTICS);
         }
     }
@@ -230,15 +246,20 @@ public class LevelThree extends GUIState {
     }
 
     private void removeObjects() {
-        enemyOneSkin.setHorizontalPosition(900);
-        enemyOne.setHorizontalPosition(900);
-        worm.setHorizontalPosition(900);
-        player.setHorizontalPosition(150);
+        enemyOneSkin.setHorizontalPosition(GameEngine.WIDTH + 200);
+        enemyOne.setHorizontalPosition(GameEngine.WIDTH + 200);
+        worm.setHorizontalPosition(GameEngine.WIDTH + 200);
+        player.setHorizontalPosition(GameEngine.WIDTH + 200);
         player.setVerticalPosition(150);
+        player.setHorizontalPosition(150);
         player.setXDirection(0);
         player.setYDirection(0);
         levelBubbles.moveOutOfFrame();
+        rockOne.setVerticalPosition(GameEngine.HEIGHT);
         rockTwo.setVerticalPosition(GameEngine.HEIGHT);
+        rockThree.setVerticalPosition(GameEngine.HEIGHT);
+        blueSeaweed.setVerticalPosition(GameEngine.HEIGHT);
+        greenSeaweed.setVerticalPosition(GameEngine.HEIGHT);
     }
 
     private void newPlayer() {
