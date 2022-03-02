@@ -23,7 +23,7 @@ public class MainMenu extends GUIState {
     private static final File gameLogo = new File("src/main/resources/game_objects/menu/game_logo_450.png");
     private static final File menuMusic = new File("src/main/resources/game_objects/sounds/Level one.wav");
 
-    private static int currentChoice = 0;
+    private static int currentChoice;
 
     private BufferedImage backgroundImage;
     private BufferedImage logoImage;
