@@ -18,7 +18,7 @@ public class MainMenu extends GUIState {
 
     private static final Sounds sounds = new Sounds();
     private static final MainMenuBubbles mainMenuBubbles = new MainMenuBubbles();
-    private static final String[] options = {"NEW GAME", "CONTROLS", "       QUIT"};
+    private static final String[] options = {"          NEW GAME", "HELP & STATISTICS", "                 QUIT"};
     private static final File background = new File("src/main/resources/game_objects/menu/menu_two.jpg");
     private static final File gameLogo = new File("src/main/resources/game_objects/menu/game_logo_450.png");
     private static final File menuMusic = new File("src/main/resources/game_objects/sounds/Level one.wav");
@@ -73,7 +73,7 @@ public class MainMenu extends GUIState {
             } else {
                 g.setColor(Color.WHITE);
             }
-            g.drawString(options[i], (GameEngine.WIDTH / 2) - 100, 290 + i * 38);
+            g.drawString(options[i], (GameEngine.WIDTH / 2) - 190, 290 + i * 38);
         }
     }
 
@@ -82,7 +82,6 @@ public class MainMenu extends GUIState {
             GUIStateManager.setStates(com.waterworld.game_engine.GUIStateManager.LEVEL_ONE);
             GUIStateManager.getClip().stop();
             playLevelMusic();
-
         }
 
         if (currentChoice == 1) {
@@ -107,7 +106,6 @@ public class MainMenu extends GUIState {
             mainMenuBubbles.transferInitialBubbles();
             selectMenuOption();
         }
-
         if (key.getKeyCode() == KeyEvent.VK_UP || key.getKeyCode() == KeyEvent.VK_W) {
             currentChoice--;
             sounds.setNavigationSound();

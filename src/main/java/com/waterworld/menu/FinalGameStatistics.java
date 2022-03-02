@@ -16,18 +16,17 @@ import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
 public class FinalGameStatistics extends GUIState {
 
+    private static final List<String> scores = new ArrayList<>();
     private static final Sounds sounds = new Sounds();
     private static final GameBubbles bubbles = new GameBubbles(false);
-    private static final File backgroundFile = new File("src/main/resources/game_objects/level_objects/Statistics dead background 800x403.jpg");
+    private static final File backgroundFile = new File("src/main/resources/game_objects/level_objects/Final statistics 800x405.jpg");
     private static final String[] options = {"   REPEAT  GAME","SAVE STATISTICS", "   QUIT TO MENU"};
     private static final int INITIAL_PLAYER_LIFE = 3;
 
@@ -159,6 +158,7 @@ public class FinalGameStatistics extends GUIState {
     }
 
     private void backToMainMenuSave() {
+        readFile();
         int totalScores = Point.getPoints().get(0) + Point.getPoints().get(1) + Point.getPoints().get(2);
         try {
             statisticWriter = new FileWriter("src/main/resources/game_objects/statistics.txt");
@@ -166,9 +166,12 @@ public class FinalGameStatistics extends GUIState {
                     LocalDateTime.now().getDayOfMonth()
                             + "/" + LocalDateTime.now().getMonth()
                             + "/" + LocalDateTime.now().getYear()
-                            + "   " + LocalDateTime.now().getHour()
+                            + "     " + LocalDateTime.now().getHour()
                             + ":" + LocalDateTime.now().getMinute()
-                            + " - " + totalScores);
+                            + "   -   " + totalScores + " p.");
+            for (String item : scores) {
+                statisticWriter.write(item);
+            }
             statisticWriter.close();
         } catch (IOException e) {
             e.printStackTrace();
@@ -189,5 +192,18 @@ public class FinalGameStatistics extends GUIState {
 
     private void setCurrentChoice(int currentChoice) {
         FinalGameStatistics.currentChoice = currentChoice;
+    }
+
+    private void readFile() {
+        try {
+            BufferedReader reader = new BufferedReader(new FileReader("src/main/resources/game_objects/statistics.txt"));
+            String line;
+            while ((line = reader.readLine()) != null) {
+                scores.add("\n" + line);
+            }
+            reader.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

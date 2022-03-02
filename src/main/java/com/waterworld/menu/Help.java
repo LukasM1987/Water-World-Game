@@ -20,6 +20,9 @@ public class Help extends GUIState {
     private static final Sounds sounds = new Sounds();
     private static final GameBubbles bubbles = new GameBubbles(false);
     private static final File backgroundFile = new File("src/main/resources/game_objects/menu/menu_two.jpg");
+    private static final String[] options = {"STATISTICS","       BACK"};
+
+    private static int currentChoice;
 
     private BufferedImage backgroundImage;
     private GameObject leftButton;
@@ -30,6 +33,7 @@ public class Help extends GUIState {
     private GameObject rightMoveInfo;
     private GameObject downMoveInfo;
     private GameObject upMoveInfo;
+
 
     public Help(GUIStateManager GUIStateManager) {
         this.GUIStateManager = GUIStateManager;
@@ -64,7 +68,6 @@ public class Help extends GUIState {
     public void draw(Graphics g) {
         drawGraphics(g);
         bubbles.drawBack(g);
-        drawHelpInformation(g);
         leftButton.draw(g);
         rightButton.draw(g);
         downButton.draw(g);
@@ -87,6 +90,22 @@ public class Help extends GUIState {
                 e.printStackTrace();
             }
             selectMenuOption();
+            setCurrentChoice(0);
+        }
+        if (key.getKeyCode() == KeyEvent.VK_UP || key.getKeyCode() == KeyEvent.VK_W) {
+            currentChoice--;
+            sounds.setNavigationSound();
+            if (currentChoice == -1) {
+                currentChoice = options.length - 1;
+            }
+        }
+
+        if (key.getKeyCode() == KeyEvent.VK_DOWN || key.getKeyCode() == KeyEvent.VK_S) {
+            currentChoice++;
+            sounds.setNavigationSound();
+            if (currentChoice == options.length) {
+                currentChoice = 0;
+            }
         }
     }
 
@@ -95,31 +114,37 @@ public class Help extends GUIState {
 
     }
 
-    private void selectMenuOption() {
-        leftButton.setVerticalPosition(450);
-        rightButton.setVerticalPosition(450);
-        upButton.setVerticalPosition(450);
-        downButton.setVerticalPosition(450);
-        leftMoveInfo.setVerticalPosition(450);
-        rightMoveInfo.setVerticalPosition(450);
-        downMoveInfo.setVerticalPosition(450);
-        upMoveInfo.setVerticalPosition(450);
-        bubbles.moveOutOfFrame();
-        GUIStateManager.setStates(com.waterworld.game_engine.GUIStateManager.MENU);
+    private void setCurrentChoice(int currentChoice) {
+        Help.currentChoice = currentChoice;
+    }
+
+    private int selectMenuOption() {
+        if (currentChoice == 0) {
+            removeObjects();
+            Statistics.readScores();
+            GUIStateManager.setStates(com.waterworld.game_engine.GUIStateManager.MENU_STATISTICS);
+        }
+        if (currentChoice == 1) {
+            removeObjects();
+            GUIStateManager.setStates(com.waterworld.game_engine.GUIStateManager.MENU);
+        }
+        return currentChoice;
     }
 
     private void drawGraphics(Graphics g) {
         g.drawImage(backgroundImage, 0, 0, null);
     }
 
-    private void drawHelpInformation(Graphics g) {
-
-    }
-
     private void drawMenuOption(Graphics g) {
-        g.setColor(new Color(248,174,71));
         g.setFont(new Font("Showcard Gothic", Font.PLAIN, 42));
-        g.drawString("BACK", (GameEngine.WIDTH / 2) - 52, GameEngine.HEIGHT - 20);
+        for (int i = 0; i < options.length; i++) {
+            if (i == currentChoice) {
+                g.setColor(new Color(248, 174, 71));
+            } else {
+                g.setColor(Color.WHITE);
+            }
+            g.drawString(options[i], (GameEngine.WIDTH / 2) - 110, 312 + i * 38);
+        }
     }
 
     private void setObjects() {
@@ -161,5 +186,17 @@ public class Help extends GUIState {
         if (upMoveInfo.getVerticalPos() >= 64) {
             upMoveInfo.setVerticalVelocity(0);
         }
+    }
+
+    private void removeObjects() {
+        leftButton.setVerticalPosition(450);
+        rightButton.setVerticalPosition(450);
+        upButton.setVerticalPosition(450);
+        downButton.setVerticalPosition(450);
+        leftMoveInfo.setVerticalPosition(450);
+        rightMoveInfo.setVerticalPosition(450);
+        downMoveInfo.setVerticalPosition(450);
+        upMoveInfo.setVerticalPosition(450);
+        bubbles.moveOutOfFrame();
     }
 }

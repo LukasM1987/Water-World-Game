@@ -23,7 +23,7 @@ public class LevelStatistics extends GUIState {
 
     private static final Sounds sounds = new Sounds();
     private static final GameBubbles bubbles = new GameBubbles(false);
-    private static final File backgroundFile = new File("src/main/resources/game_objects/level_objects/Statistics dead background 800x403.jpg");
+    private static final File backgroundFile = new File("src/main/resources/game_objects/level_objects/Level statistics 800x403.jpg");
     private static final String[] optionsDead = {"REPEAT  GAME", "QUIT TO MENU"};
     private static final String[] optionsWin = {"   NEXT  LEVEL", "QUIT TO MENU"};
     private static final int INITIAL_PLAYER_LIFE = 3;
