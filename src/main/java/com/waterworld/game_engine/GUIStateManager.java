@@ -28,12 +28,12 @@ public class GUIStateManager {
     public static final int FINAL_GAME_STATISTICS = 6;
     public static final int MENU_STATISTICS = 7;
 
-    private int currentState;
     private static Clip clip;
+
+    private int currentState;
 
     public GUIStateManager() {
         currentState = MENU;
-        playMainMenuMusic();
         gamesStates.add(new MainMenu(this));
         gamesStates.add(new Help(this));
         gamesStates.add(new LevelOne(this));
@@ -42,6 +42,7 @@ public class GUIStateManager {
         gamesStates.add(new LevelThree(this));
         gamesStates.add(new FinalGameStatistics(this));
         gamesStates.add(new Statistics(this));
+        playMainMenuMusic();
     }
 
     public void setStates(int state) {
