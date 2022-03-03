@@ -47,7 +47,6 @@ public class LevelThree extends GUIState {
     private Enemy enemyOne;
     private Enemy enemyTwo;
 
-
     private Player player;
     private int gainLife;
 
