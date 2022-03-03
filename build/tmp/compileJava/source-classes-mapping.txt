@@ -10,8 +10,8 @@ com/waterworld/game_engine/GameEngine.java
  com.waterworld.game_engine.GameEngine
 com/waterworld/menu/Statistics.java
  com.waterworld.menu.Statistics
-com/waterworld/game_objects/GameBubbles.java
- com.waterworld.game_objects.GameBubbles
+com/waterworld/game_engine/GUIState.java
+ com.waterworld.game_engine.GUIState
 com/waterworld/game_engine/Frame.java
  com.waterworld.game_engine.Frame
 com/waterworld/game_objects/Player.java
@@ -20,16 +20,18 @@ com/waterworld/menu/MainMenu.java
  com.waterworld.menu.MainMenu
 com/waterworld/game_engine/StringObjectValue.java
  com.waterworld.game_engine.StringObjectValue
-com/waterworld/game_engine/GUIState.java
- com.waterworld.game_engine.GUIState
 com/waterworld/game_objects/MainMenuBubbles.java
  com.waterworld.game_objects.MainMenuBubbles
 com/waterworld/menu/Help.java
  com.waterworld.menu.Help
+com/waterworld/game_objects/GameBubbles.java
+ com.waterworld.game_objects.GameBubbles
 com/waterworld/game_objects/LevelSeaweed.java
  com.waterworld.game_objects.LevelSeaweed
 com/waterworld/game_objects/GameObject.java
  com.waterworld.game_objects.GameObject
+com/waterworld/level/LevelOne.java
+ com.waterworld.level.LevelOne
 com/waterworld/level/LevelTwo.java
  com.waterworld.level.LevelTwo
 com/waterworld/level/LevelThree.java
@@ -40,5 +42,3 @@ com/waterworld/menu/LevelStatistics.java
  com.waterworld.menu.LevelStatistics
 com/waterworld/menu/FinalGameStatistics.java
  com.waterworld.menu.FinalGameStatistics
-com/waterworld/level/LevelOne.java
- com.waterworld.level.LevelOne
