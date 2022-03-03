@@ -47,7 +47,6 @@ public class LevelThree extends GUIState {
     private Enemy enemyOne;
     private Enemy enemyTwo;
 
-
     private Player player;
     private int gainLife;
 
@@ -135,8 +134,8 @@ public class LevelThree extends GUIState {
         worm = new GameObject(1, StringObjectValue.WORM.getValue(), StringObjectValue.RIGHT.getValue(), 0,0, 840, 180, 27,30);
         enemyOne = new Enemy(2, 1000, 240, 115, 124);
         enemyOneSkin = new GameObject(2, StringObjectValue.ENEMY.getValue(), StringObjectValue.RIGHT.getValue(), 0,0, 1000, 235, 120,131);
-        enemyTwo = new Enemy(3, 1340, 10, 80, 90);
-        enemyTwoSkin = new GameObject(3, StringObjectValue.ENEMY_TWO.getValue(), StringObjectValue.RIGHT.getValue(), 0,0, 1300, -35, 120,131);
+        enemyTwo = new Enemy(4, 1340, 10, 80, 90);
+        enemyTwoSkin = new GameObject(4, StringObjectValue.ENEMY_TWO.getValue(), StringObjectValue.RIGHT.getValue(), 0,0, 1300, -35, 120,131);
         rockOne = new GameObject(1, StringObjectValue.ROCK_ONE.getValue(), StringObjectValue.RIGHT.getValue(), 0, 0, GameEngine.WIDTH + 30, 354, 153, 71);
         rockTwo = new GameObject(1, StringObjectValue.ROCK_TWO.getValue(), StringObjectValue.RIGHT.getValue(), 0, 0, GameEngine.WIDTH + 356, GameEngine.HEIGHT - 136, 174, 225);
         rockThree = new GameObject(1, StringObjectValue.ROCK_ONE.getValue(), StringObjectValue.RIGHT.getValue(), 0, 0, GameEngine.WIDTH + 739, 354, 174, 225);
