@@ -57,7 +57,7 @@ public class GameEngine extends JPanel implements Runnable, KeyListener {
                 delta--;
             }
             if(System.currentTimeMillis() - timer >= 1000){
-                //System.out.println("FPS: " + fps + " per second");
+                System.out.println("FPS: " + fps + " per second");
                 fps = 0;
                 timer += 1000;
             }

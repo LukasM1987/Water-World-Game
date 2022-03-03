@@ -1,7 +1,6 @@
 package com.waterworld.game_objects;
 
 import com.waterworld.game_engine.StringObjectValue;
-import com.waterworld.game_objects.GameObject;
 
 import java.awt.*;
 import java.util.Random;

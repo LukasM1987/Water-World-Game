@@ -28,6 +28,7 @@ public class GameObject {
     private static final File rockOne = new File("src/main/resources/game_objects/level_objects/rock 1.png");
     private static final File rockTwo = new File("src/main/resources/game_objects/level_objects/rock 2.png");
     private static final File fish = new File("src/main/resources/game_objects/player/player right.png");
+    private static final File statisticFish = new File("src/main/resources/game_objects/level_objects/statistic fish 90x90.png");
 
 
     private int initialSpeed;
@@ -61,6 +62,7 @@ public class GameObject {
     private BufferedImage orangeIcon;
     private BufferedImage greenIcon;
     private BufferedImage blueIcon;
+    private BufferedImage statisticFishIcon;
 
     public GameObject(int initialSpeed, String objectName, String direction, int directionX, int directionY, int xPosition, int yPosition, int xSize, int ySize) {
         this.rectangle = new Rectangle(xPosition, yPosition, xSize, ySize);
@@ -94,6 +96,7 @@ public class GameObject {
             orangeIcon = ImageIO.read(seaWeedOrange);
             greenIcon = ImageIO.read(seaWeedGreen);
             blueIcon = ImageIO.read(seaWeedBlue);
+            statisticFishIcon = ImageIO.read(statisticFish);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -205,6 +208,8 @@ public class GameObject {
            g.drawImage(greenIcon, rectangle.x, rectangle.y, null);
        } else if (objectName.equals("blue seaweed")) {
            g.drawImage(blueIcon, rectangle.x, rectangle.y, null);
+       } else if (objectName.equals("statistic fish")) {
+           g.drawImage(statisticFishIcon, rectangle.x, rectangle.y, null);
        }
     }
 
@@ -224,28 +229,12 @@ public class GameObject {
         return verticalVelocity;
     }
 
-    public int getXVelocity() {
-        return horizontalVelocity;
-    }
-
     public void setHorizontalVelocity(int horizontalVelocity) {
         this.horizontalVelocity = horizontalVelocity;
     }
 
     public void setVerticalVelocity(int verticalVelocity) {
         this.verticalVelocity = verticalVelocity;
-    }
-
-    public void increaseHorizontalVelocity() {
-        horizontalVelocity++;
-    }
-
-    public void increaseVerticalVelocity() {
-        verticalVelocity++;
-    }
-
-    public void reduceVerticalVelocity() {
-        verticalVelocity--;
     }
 
     public void setVerticalPosition(int verticalPos) {

@@ -28,16 +28,12 @@ public class Enemy {
         return this.rectangle.intersects(rectangle);
     }
 
-    public int getVerticalPos() {
-        return rectangle.y;
-    }
-
     public int getHorizontalPos() {
         return rectangle.x;
     }
 
     public void draw(Graphics g) {
-        g.fillRect(rectangle.x, rectangle.y, rectangle.width, rectangle.height);
+        g.fillOval(rectangle.x, rectangle.y, rectangle.width, rectangle.height);
     }
 
     public void setVerticalPosition(int verticalPos) {
