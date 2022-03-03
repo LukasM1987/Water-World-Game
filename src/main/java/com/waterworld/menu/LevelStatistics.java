@@ -33,6 +33,7 @@ public class LevelStatistics extends GUIState {
     private BufferedImage background;
     private GameObject deadFish;
     private GameObject fish;
+    private GameObject statisticFish;
 
     public LevelStatistics(GUIStateManager GUIStateManager) {
         this.GUIStateManager = GUIStateManager;
@@ -53,6 +54,8 @@ public class LevelStatistics extends GUIState {
     public void update() {
         moveFish();
         bubbles.move();
+        statisticFish.move();
+        setStatisticFishMove();
         transferObjects();
         if (LevelOne.getLevelOne() == 1) {
             if (LevelOne.isWin()) {
@@ -83,17 +86,26 @@ public class LevelStatistics extends GUIState {
         g.setColor(new Color(225, 74, 83));
         g.drawString("YOUR TOTAL SCORES", 190, 50);
         if (LevelOne.getLevelOne() == 1) {
+            if (Point.getPoints().get(0) >= 20) {
+                statisticFish.draw(g);
+            }
             g.drawString("IN FIRST LEVEL" , 254, 100);
             g.setFont(new Font("Showcard Gothic", Font.PLAIN, 80));
-            g.drawString(String.valueOf(Point.getPoints().get(0)), 380, 210);
+            g.drawString(String.valueOf(Point.getPoints().get(0)), 365, 210);
         } else if (LevelTwo.getLevelTwo() == 2) {
+            if (Point.getPoints().get(1) >= 40) {
+                statisticFish.draw(g);
+            }
             g.drawString("IN SECOND LEVEL" , 254, 100);
             g.setFont(new Font("Showcard Gothic", Font.PLAIN, 80));
-            g.drawString(String.valueOf(Point.getPoints().get(1)), 380, 210);
+            g.drawString(String.valueOf(Point.getPoints().get(1)), 365, 210);
         } else if (LevelThree.getLevelThree() == 3) {
+            if (Point.getPoints().get(2) >= 60) {
+                statisticFish.draw(g);
+            }
             g.drawString("IN THIRD LEVEL" , 254, 100);
             g.setFont(new Font("Showcard Gothic", Font.PLAIN, 80));
-            g.drawString(String.valueOf(Point.getPoints().get(2)), 380, 210);
+            g.drawString(String.valueOf(Point.getPoints().get(2)), 365, 210);
         }
         bubbles.drawFront(g);
     }
@@ -202,6 +214,7 @@ public class LevelStatistics extends GUIState {
         bubbles.init();
         deadFish = new GameObject(1, StringObjectValue.DEAD_FISH.getValue(), StringObjectValue.UP.getValue(), 0, 0, 250, 150,90, 65);
         fish = new GameObject(1, StringObjectValue.FISH.getValue(), StringObjectValue.UP.getValue(), 0, 0, 250, 150,90, 65);
+        statisticFish = new GameObject(1, StringObjectValue.STATISTIC_FISH.getValue(), StringObjectValue.ANY_DIRECTION.getValue(), 0, 1, 800, 150, 90, 90);
     }
 
     private void transferObjects() {
@@ -223,6 +236,18 @@ public class LevelStatistics extends GUIState {
         }
         if (fish.getVerticalPos() >= 180) {
             fish.setYDirection(-fish.getYVelocity());
+        }
+    }
+
+    private void setStatisticFishMove() {
+        if (statisticFish.getVerticalPos() <= 100) {
+            statisticFish.setYDirection(-statisticFish.getYVelocity());
+        }
+        if (statisticFish.getVerticalPos() >= 180) {
+            statisticFish.setYDirection(-statisticFish.getYVelocity());
+        }
+        if (statisticFish.getHorizontalPos() <= GameEngine.WIDTH / 2 + 50) {
+            statisticFish.setHorizontalVelocity(0);
         }
     }
 

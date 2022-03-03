@@ -27,7 +27,7 @@ public class FinalGameStatistics extends GUIState {
     private static final Sounds sounds = new Sounds();
     private static final GameBubbles bubbles = new GameBubbles(false);
     private static final File backgroundFile = new File("src/main/resources/game_objects/level_objects/Final statistics 800x405.jpg");
-    private static final String[] options = {"   REPEAT  GAME","SAVE STATISTICS", "   QUIT TO MENU"};
+    private static final String[] options = {"SAVE STATISTICS", "   QUIT TO MENU"};
     private static final int INITIAL_PLAYER_LIFE = 3;
 
     private static int currentChoice;
@@ -35,6 +35,7 @@ public class FinalGameStatistics extends GUIState {
     private BufferedImage background;
     private FileWriter statisticWriter;
     private GameObject fish;
+    private GameObject statisticFish;
 
     public FinalGameStatistics(GUIStateManager GuiStateManager) {
         this.GUIStateManager = GuiStateManager;
@@ -55,6 +56,8 @@ public class FinalGameStatistics extends GUIState {
     public void update() {
         bubbles.move();
         fish.move();
+        statisticFish.move();
+        setStatisticFishMove();
         setFishMove();
         transferObjects();
     }
@@ -69,8 +72,12 @@ public class FinalGameStatistics extends GUIState {
         g.drawString("YOUR TOTAL SCORES", 190, 50);
         g.drawString("IN THE GAME" , 268, 100);
         g.setFont(new Font("Showcard Gothic", Font.PLAIN, 80));
-        g.drawString(String.valueOf(Point.getPoints().get(0) + Point.getPoints().get(1) + Point.getPoints().get(2)), 380, 210);
+        int result = Point.getPoints().get(0) + Point.getPoints().get(1) + Point.getPoints().get(2);
+        g.drawString(String.valueOf(result), 350, 210);
         g.setFont(new Font("Showcard Gothic", Font.PLAIN, 42));
+        if (result >= 120) {
+            statisticFish.draw(g);
+        }
         drawMenuOptions(g);
         bubbles.drawFront(g);
     }
@@ -107,6 +114,7 @@ public class FinalGameStatistics extends GUIState {
     private void setObjects() {
         bubbles.init();
         fish = new GameObject(1, StringObjectValue.FISH.getValue(), StringObjectValue.UP.getValue(), 0, 0, 250, 150,90, 65);
+        statisticFish = new GameObject(1, StringObjectValue.STATISTIC_FISH.getValue(), StringObjectValue.ANY_DIRECTION.getValue(), 0, 1, 810, 150, 90, 90);
     }
 
     private void setFishMove() {
@@ -118,31 +126,37 @@ public class FinalGameStatistics extends GUIState {
         }
     }
 
+    private void setStatisticFishMove() {
+        if (statisticFish.getVerticalPos() <= 100) {
+            statisticFish.setYDirection(-statisticFish.getYVelocity());
+        }
+        if (statisticFish.getVerticalPos() >= 180) {
+            statisticFish.setYDirection(-statisticFish.getYVelocity());
+        }
+        if (statisticFish.getHorizontalPos() <= GameEngine.WIDTH / 2 + 60) {
+            statisticFish.setHorizontalVelocity(0);
+        }
+    }
+
     private void transferObjects() {
         bubbles.transfer();
     }
 
-    private int selectMenuOption() {
-        if(currentChoice == 0){
+    private void selectMenuOption() {
+        if (currentChoice == 0) {
             Point.zeroScore();
             Point.zeroScoreInLevel();
+            Point.setLife(3);
             LevelOne.setLevelOne(0);
             LevelTwo.setLevelTwo(0);
             LevelThree.setLevelThree(0);
             setCurrentChoice(0);
-            MainMenu.playLevelMusic();
-            GUIStateManager.setStates(com.waterworld.game_engine.GUIStateManager.LEVEL_THREE);
+            backToMainMenuSave();
         }
         if (currentChoice == 1) {
             setCurrentChoice(0);
-            backToMainMenuSave();
-        }
-
-        if (currentChoice == 2) {
-            setCurrentChoice(0);
             backToMainMenuNoSave();
         }
-        return currentChoice;
     }
 
     private void backToMainMenuNoSave() {

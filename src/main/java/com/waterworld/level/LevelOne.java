@@ -26,7 +26,7 @@ public class LevelOne extends GUIState {
     private static final File life = new File("src/main/resources/game_objects/points/life.png");
 
     private static final int MINUS_THIRTY_TWO = -32;
-    private static final int MAX_POINTS = 2;
+    private static final int MAX_POINTS = 25;
     private static final int MINUS_ONE_HUNDRED_TWENTY = -120;
     private static final int GIVE_LIFE = 10;
     private static final int INITIAL_PLAYER_LIFE = 3;

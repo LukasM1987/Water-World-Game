@@ -46,7 +46,6 @@ public class LevelSeaweed {
         seaweedOne14 = new GameObject(1, StringObjectValue.SEAWEED_TWO.getValue(), StringObjectValue.RIGHT.getValue(), 0,0,GameEngine.WIDTH + 845 + 150, 315,100,85);
         seaweedTwo1 = new GameObject(1, StringObjectValue.SEAWEED_ONE.getValue(), StringObjectValue.RIGHT.getValue(),0,0, GameEngine.WIDTH + 250, 200, 200,200);
         seaweedTwo2 = new GameObject(1, StringObjectValue.SEAWEED_ONE.getValue(), StringObjectValue.RIGHT.getValue(),0,0, GameEngine.WIDTH + 850, 200, 200,200);
-
     }
 
     public void move() {
