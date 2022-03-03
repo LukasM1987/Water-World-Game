@@ -229,28 +229,12 @@ public class GameObject {
         return verticalVelocity;
     }
 
-    public int getXVelocity() {
-        return horizontalVelocity;
-    }
-
     public void setHorizontalVelocity(int horizontalVelocity) {
         this.horizontalVelocity = horizontalVelocity;
     }
 
     public void setVerticalVelocity(int verticalVelocity) {
         this.verticalVelocity = verticalVelocity;
-    }
-
-    public void increaseHorizontalVelocity() {
-        horizontalVelocity++;
-    }
-
-    public void increaseVerticalVelocity() {
-        verticalVelocity++;
-    }
-
-    public void reduceVerticalVelocity() {
-        verticalVelocity--;
     }
 
     public void setVerticalPosition(int verticalPos) {
