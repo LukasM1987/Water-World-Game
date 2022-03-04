@@ -79,9 +79,9 @@ public class MainMenu extends GUIState {
 
     private int selectMenuOption(){
         if(currentChoice == 0){
-            GUIStateManager.setStates(com.waterworld.game_engine.GUIStateManager.LEVEL_ONE);
             GUIStateManager.getClip().stop();
             playLevelMusic();
+            GUIStateManager.setStates(com.waterworld.game_engine.GUIStateManager.LEVEL_ONE);
         }
 
         if (currentChoice == 1) {
