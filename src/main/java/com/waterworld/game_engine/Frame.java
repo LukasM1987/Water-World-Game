@@ -20,6 +20,7 @@ public class Frame {
         frame.setResizable(false);
         frame.pack();
         frame.setLocationRelativeTo(null);
+        waitForFrame();
         frame.setVisible(true);
     }
 
@@ -27,6 +28,14 @@ public class Frame {
         try {
             icon = ImageIO.read(frameIcon);
         } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void waitForFrame() {
+        try {
+            Thread.sleep(4000);
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
