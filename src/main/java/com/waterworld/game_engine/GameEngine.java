@@ -6,15 +6,21 @@ import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.image.BufferedImage;
+import java.io.File;
 
 public class GameEngine extends JPanel implements Runnable, KeyListener {
 
     public static final int WIDTH = 800;
     public static final int HEIGHT = 400;
 
+    private static final File backgroundFile = new File("src/main/resources/game_objects/menu/loading.jpg");
+
     private Thread thread;
     private boolean running;
 
+    private ImageIcon imageIcon;
+    private JLabel label;
+    private JLabel loading;
     private BufferedImage image;
     private Graphics g;
 
@@ -25,6 +31,7 @@ public class GameEngine extends JPanel implements Runnable, KeyListener {
         setPreferredSize(new Dimension(WIDTH, HEIGHT));
         setFocusable(true);
         requestFocus();
+        drawLoadingScreen();
     }
     public void addNotify() {
         super.addNotify();
@@ -98,5 +105,13 @@ public class GameEngine extends JPanel implements Runnable, KeyListener {
         Graphics g2 = getGraphics();
         g2.drawImage(image, 0, 0, WIDTH, HEIGHT, null);
         g2.dispose();
+    }
+
+    private void drawLoadingScreen() {
+        imageIcon = new ImageIcon((backgroundFile.getPath()));
+        label = new JLabel(imageIcon);
+        label.setBounds(0,-80,WIDTH, HEIGHT + 80);
+        setLayout(null);
+        add(label);
     }
 }
