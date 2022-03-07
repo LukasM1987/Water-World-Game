@@ -20,7 +20,6 @@ public class GameEngine extends JPanel implements Runnable, KeyListener {
 
     private ImageIcon imageIcon;
     private JLabel label;
-    private JLabel loading;
     private BufferedImage image;
     private Graphics g;
 
