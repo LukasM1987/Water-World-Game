@@ -109,7 +109,7 @@ public class GameEngine extends JPanel implements Runnable, KeyListener {
     private void drawLoadingScreen() {
         imageIcon = new ImageIcon((backgroundFile.getPath()));
         label = new JLabel(imageIcon);
-        label.setBounds(0,-80,WIDTH, HEIGHT + 80);
+        label.setBounds(0,-40,WIDTH, HEIGHT + 80);
         setLayout(null);
         add(label);
     }

@@ -61,7 +61,7 @@ public class MainMenu extends GUIState {
     }
 
     private void drawGraphics(Graphics g) {
-        g.drawImage(backgroundImage, 0, -80, null);
+        g.drawImage(backgroundImage, 0, 0, null);
         g.drawImage(logoImage, (GameEngine.WIDTH / 2) - (logoImage.getWidth() / 2), 5, null);
         g.setFont(new Font("Showcard Gothic", Font.PLAIN, 42));
     }

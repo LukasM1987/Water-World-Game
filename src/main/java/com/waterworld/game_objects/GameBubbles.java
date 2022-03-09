@@ -9,7 +9,6 @@ public class GameBubbles {
 
     private static final Random random = new Random();
 
-    private static final int MINUS_SIXTEEN = -16;
     private static final int MINUS_THIRTY_TWO = -32;
     private static final int MINUS_SIXTY_FOUR = -64;
 
@@ -30,16 +29,16 @@ public class GameBubbles {
     }
 
     public void init() {
-        bubble8x8One = new GameObject(3, StringObjectValue.BUBBLE_8X8.getValue(), StringObjectValue.UP.getValue(), 0, 0, 123, 423, 8, 8);
-        bubble8x8Two = new GameObject(3, StringObjectValue.BUBBLE_8X8.getValue(), StringObjectValue.UP.getValue(), 0, 0, 213, 431, 8, 8);
-        bubble8x8Three = new GameObject(3, StringObjectValue.BUBBLE_8X8.getValue(), StringObjectValue.UP.getValue(), 0, 0, 437, 411, 8, 8);
-        bubble8x8Four = new GameObject(3, StringObjectValue.BUBBLE_8X8.getValue(), StringObjectValue.UP.getValue(), 0, 0, 692, 452, 8, 8);
+        bubble8x8One = new GameObject(1, StringObjectValue.BUBBLE_8X8.getValue(), StringObjectValue.UP.getValue(), 0, 0, 123, 423, 8, 8);
+        bubble8x8Two = new GameObject(1, StringObjectValue.BUBBLE_8X8.getValue(), StringObjectValue.UP.getValue(), 0, 0, 213, 431, 8, 8);
+        bubble8x8Three = new GameObject(1, StringObjectValue.BUBBLE_8X8.getValue(), StringObjectValue.UP.getValue(), 0, 0, 437, 411, 8, 8);
+        bubble8x8Four = new GameObject(1, StringObjectValue.BUBBLE_8X8.getValue(), StringObjectValue.UP.getValue(), 0, 0, 692, 452, 8, 8);
         bubble16x16One = new GameObject(2, StringObjectValue.BUBBLE_16X16.getValue(), StringObjectValue.UP.getValue(), 0, 0, 246, 462, 16, 16);
         bubble16x16Two = new GameObject(2, StringObjectValue.BUBBLE_16X16.getValue(), StringObjectValue.UP.getValue(), 0, 0, 576, 452, 16, 16);
-        bubble24x24One = new GameObject(2, StringObjectValue.BUBBLE_24X24.getValue(), StringObjectValue.UP.getValue(), 0, 0, 146, 572, 16, 16);
-        bubble24x24Two = new GameObject(2, StringObjectValue.BUBBLE_24X24.getValue(), StringObjectValue.UP.getValue(), 0, 0, 746, 523, 16, 16);
+        bubble24x24One = new GameObject(3, StringObjectValue.BUBBLE_24X24.getValue(), StringObjectValue.UP.getValue(), 0, 0, 146, 572, 16, 16);
+        bubble24x24Two = new GameObject(3, StringObjectValue.BUBBLE_24X24.getValue(), StringObjectValue.UP.getValue(), 0, 0, 746, 523, 16, 16);
         if (isLevel) {
-            bubble36x36One = new GameObject(1, StringObjectValue.BUBBLE_36X36.getValue(), StringObjectValue.UP.getValue(), 0, 0, 398, 532, 36, 36);
+            bubble36x36One = new GameObject(4, StringObjectValue.BUBBLE_36X36.getValue(), StringObjectValue.UP.getValue(), 0, 0, 398, 532, 36, 36);
         }
     }
 
@@ -75,19 +74,19 @@ public class GameBubbles {
     }
 
     public void transfer() {
-        if (bubble8x8One.getVerticalPos() <= MINUS_SIXTEEN) {
+        if (bubble8x8One.getVerticalPos() <= MINUS_THIRTY_TWO) {
             bubble8x8One.setVerticalPosition(442);
             bubble8x8One.setHorizontalPosition(random.nextInt(400));
         }
-        if (bubble8x8Two.getVerticalPos() <= MINUS_SIXTEEN) {
+        if (bubble8x8Two.getVerticalPos() <= MINUS_THIRTY_TWO) {
             bubble8x8Two.setVerticalPosition(412);
             bubble8x8Two.setHorizontalPosition(random.nextInt(400));
         }
-        if (bubble8x8Three.getVerticalPos() <= MINUS_SIXTEEN) {
+        if (bubble8x8Three.getVerticalPos() <= MINUS_THIRTY_TWO) {
             bubble8x8Three.setVerticalPosition(482);
             bubble8x8Three.setHorizontalPosition(random.nextInt(400) + 390);
         }
-        if (bubble8x8Four.getVerticalPos() <= MINUS_SIXTEEN) {
+        if (bubble8x8Four.getVerticalPos() <= MINUS_THIRTY_TWO) {
             bubble8x8Four.setVerticalPosition(452);
             bubble8x8Four.setHorizontalPosition(random.nextInt(400) + 390);
         }
