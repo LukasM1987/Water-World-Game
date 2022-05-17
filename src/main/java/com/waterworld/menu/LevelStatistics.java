@@ -6,6 +6,7 @@ import com.waterworld.game_engine.GameEngine;
 import com.waterworld.game_engine.StringObjectValue;
 import com.waterworld.game_objects.GameBubbles;
 import com.waterworld.game_objects.GameObject;
+import com.waterworld.game_objects.LevelSeaweed;
 import com.waterworld.game_objects.Sounds;
 import com.waterworld.level.LevelOne;
 import com.waterworld.level.LevelThree;
