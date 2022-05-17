@@ -89,6 +89,7 @@ public class LevelOne extends GUIState {
         enemy.draw(g);
         g.drawImage(backgroundImage, 0, 0, null);
         levelBubbles.drawBack(g);
+        levelSeaweed.drawBack(g);
         rockTwo.draw(g);
         levelSeaweed.drawFront(g);
         rockOne.draw(g);
@@ -210,8 +211,8 @@ public class LevelOne extends GUIState {
             newPlayer();
             levelOne = 1;
             LevelStatistics.setCurrentChoice(0);
+            //levelSeaweed.getSeaweeds().clear();
             GUIStateManager.setStates(com.waterworld.game_engine.GUIStateManager.LEVEL_STATISTICS);
-
         } else if (Point.getLife() == 0) {
             win = false;
             zeroLife();
@@ -221,6 +222,7 @@ public class LevelOne extends GUIState {
             newPlayer();
             levelOne = 1;
             LevelStatistics.setCurrentChoice(0);
+            //levelSeaweed.getSeaweeds().clear();
             GUIStateManager.setStates(com.waterworld.game_engine.GUIStateManager.LEVEL_STATISTICS);
         }
     }
